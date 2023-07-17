@@ -12,12 +12,15 @@ declare global {
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const canDeleteElement: typeof import('./src/composables/variable')['canDeleteElement']
   const canvas: typeof import('./src/composables/variable')['canvas']
+  const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
   const clearSelection: typeof import('./src/composables/drawBoard')['clearSelection']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
+  const configDrawDrawer: typeof import('./src/composables/config')['configDrawDrawer']
+  const configDrawer: typeof import('./src/composables/config')['configDrawer']
   const context: typeof import('./src/composables/variable')['context']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
@@ -41,7 +44,7 @@ declare global {
   const drawScene: typeof import('./src/composables/drawBoard')['drawScene']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
-  const elementType: typeof import('./src/composables/variable')['elementType']
+  const elementType: typeof import('./src/composables/config')['elementType']
   const elements: typeof import('./src/composables/variable')['elements']
   const exportAsPNG: typeof import('./src/composables/drawBoard')['exportAsPNG']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -66,7 +69,7 @@ declare global {
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const initKeyStroke: typeof import('./src/composables/keyStroke')['initKeyStroke']
   const inject: typeof import('vue')['inject']
-  const isDark: typeof import('./src/composables/index')['isDark']
+  const isDark: typeof import('./src/composables/config')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isDraggingElements: typeof import('./src/composables/variable')['isDraggingElements']
   const isProxy: typeof import('vue')['isProxy']
@@ -142,7 +145,9 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
-  const toggleDark: typeof import('./src/composables/index')['toggleDark']
+  const toggleConfigDraw: typeof import('./src/composables/config')['toggleConfigDraw']
+  const toggleConfigDrawer: typeof import('./src/composables/config')['toggleConfigDrawer']
+  const toggleDark: typeof import('./src/composables/config')['toggleDark']
   const toggleHelp: typeof import('./src/composables/index')['toggleHelp']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
@@ -343,6 +348,7 @@ declare module 'vue' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -368,6 +374,7 @@ declare module 'vue' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly elementType: UnwrapRef<typeof import('./src/composables/config')['elementType']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
@@ -375,7 +382,7 @@ declare module 'vue' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
-    readonly isDark: UnwrapRef<typeof import('./src/composables/index')['isDark']>
+    readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -442,7 +449,7 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
-    readonly toggleDark: UnwrapRef<typeof import('./src/composables/index')['toggleDark']>
+    readonly toggleDark: UnwrapRef<typeof import('./src/composables/config')['toggleDark']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>
@@ -636,6 +643,7 @@ declare module '@vue/runtime-core' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -661,6 +669,7 @@ declare module '@vue/runtime-core' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly elementType: UnwrapRef<typeof import('./src/composables/config')['elementType']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
@@ -668,7 +677,7 @@ declare module '@vue/runtime-core' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
-    readonly isDark: UnwrapRef<typeof import('./src/composables/index')['isDark']>
+    readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -735,7 +744,7 @@ declare module '@vue/runtime-core' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
-    readonly toggleDark: UnwrapRef<typeof import('./src/composables/index')['toggleDark']>
+    readonly toggleDark: UnwrapRef<typeof import('./src/composables/config')['toggleDark']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>

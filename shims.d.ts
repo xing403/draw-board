@@ -3,3 +3,13 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+type ElementType = 'rectangle' | 'ellipse'
+interface ElementGraph {
+  type: ElementType
+  x: number
+  y: number
+  width: number
+  height: number
+  select: boolean
+  draw?: (rc: any, context: any) => void
+}
