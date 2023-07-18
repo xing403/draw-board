@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Config: typeof import('./src/components/Config/index.vue')['default']
     ConfigDraw: typeof import('./src/components/configDraw.vue')['default']
+    RightClick: typeof import('./src/components/RightClick.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheHelp: typeof import('./src/components/TheHelp.vue')['default']

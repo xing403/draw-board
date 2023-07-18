@@ -50,11 +50,10 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
  */
 export function initializeGraph(type: ElementType, x: number, y: number) {
   const element: ElementGraph = {
-    type, x, y, width: 0, height: 0, select: false,
+    type, x, y, width: 0, height: 0, select: false, draw: () => {},
   }
   return element
 }
-
 /** 需要处理的元素
  * @param element
  * @returns
@@ -90,3 +89,6 @@ export function processingShape(element: ElementGraph) {
       break
   }
 }
+/**
+ * 删除选中的元素
+ */

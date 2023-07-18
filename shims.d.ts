@@ -11,7 +11,7 @@ interface ElementGraph {
   width: number
   height: number
   select: boolean
-  draw?: (rc: any, context: any) => void
+  draw: (rc: any, context: any) => void
 }
 interface Point {
   x: number

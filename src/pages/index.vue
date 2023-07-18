@@ -3,6 +3,7 @@ const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
 
 const canvas = ref()
+const rightClickRef = ref()
 
 function handleMouseDown() {
   const [selectLen, selects] = hasSelected()
@@ -64,6 +65,12 @@ function handleMouseUp() {
   currentElement.value = undefined
   handleDrawCanvas(canvas.value)
 }
+function handleRightClick(event: { preventDefault: () => void }) {
+  event.preventDefault()
+  rightClickBoxPos.value.x = x.value
+  rightClickBoxPos.value.y = y.value
+  rightClickBoxPos.value.display = 'block'
+}
 onMounted(() => {
   handleDrawCanvas(canvas.value)
 })
@@ -82,7 +89,9 @@ onMounted(() => {
       @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
       @mouseup="handleMouseUp"
+      @contextmenu="handleRightClick"
     />
+    <right-click ref="rightClickRef" :canvas="canvas" :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }" />
   </div>
 </template>
 
