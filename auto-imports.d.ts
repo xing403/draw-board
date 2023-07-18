@@ -5,6 +5,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const FormatGraphPoint: typeof import('./src/utils/index')['FormatGraphPoint']
   const WINDOW_HEIGHT: typeof import('./src/composables/variable')['WINDOW_HEIGHT']
   const WINDOW_WIDTH: typeof import('./src/composables/variable')['WINDOW_WIDTH']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
@@ -13,7 +14,9 @@ declare global {
   const canDeleteElement: typeof import('./src/composables/variable')['canDeleteElement']
   const canvas: typeof import('./src/composables/variable')['canvas']
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
+  const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
   const checkInBox: typeof import('./src/utils/index')['checkInBox']
+  const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
   const clearAllSelect: typeof import('./src/composables/draw')['clearAllSelect']
   const clearSelection: typeof import('./src/composables/drawBoard')['clearSelection']
   const computed: typeof import('vue')['computed']
@@ -354,11 +357,13 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly FormatGraphPoint: UnwrapRef<typeof import('./src/utils/index')['FormatGraphPoint']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
-    readonly checkInBox: UnwrapRef<typeof import('./src/utils/index')['checkInBox']>
+    readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
+    readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
@@ -663,11 +668,13 @@ declare module 'vue' {
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly FormatGraphPoint: UnwrapRef<typeof import('./src/utils/index')['FormatGraphPoint']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
-    readonly checkInBox: UnwrapRef<typeof import('./src/utils/index')['checkInBox']>
+    readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
+    readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>

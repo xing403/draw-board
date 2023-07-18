@@ -18,9 +18,10 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
 
   const context = canvas.getContext('2d') as CanvasRenderingContext2D
   context.clearRect(0, 0, canvas.width, canvas.height)
-  elements.value.forEach((element) => {
-    if (element.draw === undefined)
-      return
+
+  if (currentElement.value !== undefined)
+    processingShape(currentElement.value)
+  elements.value.forEach((element: ElementGraph) => {
     element.draw(rc.value, context)
     if (element.select) {
       const margin = 4
@@ -38,8 +39,6 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
       context.setLineDash([])
     }
   })
-  if (currentElement.value !== undefined)
-    processingShape(currentElement.value)
 }
 /** 初始化一个 element
  * @param type 元素类型
@@ -65,6 +64,14 @@ export function processingShape(element: ElementGraph) {
     return
   let shape: Drawable
   switch (element.type) {
+    case 'selection':
+      element.draw = (rc, context) => {
+        const fillStyle = context.fillStyle
+        context.fillStyle = 'rgba(0, 0, 255, 0.10)'
+        context.fillRect(element.x, element.y, element.width, element.height)
+        context.fillStyle = fillStyle
+      }
+      break
     case 'rectangle':
       shape = generator.rectangle(0, 0, element.width, element.height)
       element.draw = (rc, context) => {

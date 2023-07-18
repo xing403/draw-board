@@ -9,8 +9,9 @@ function handleMouseDown() {
   lastX.value = x.value
   lastY.value = y.value
   if (selectLen) {
+    // 点击的位置在某个选中元素内部执行拖拽
     elementType.value = selects.some((element) => {
-      return checkInBox(element, { x: x.value, y: y.value })
+      return checkPointInBox(element, { x: x.value, y: y.value })
     })
       ? 'drag'
       : elementType.value
@@ -40,16 +41,26 @@ function handleMouseMove() {
   else {
     if (currentElement.value == null)
       return
+    if (elementType.value === 'selection') {
+      elements.value.forEach((element) => {
+        if (checkBoxInBox(element, currentElement.value as ElementGraph))
+          element.select = true
+      })
+    }
     currentElement.value.width = x.value - currentElement.value.x
     currentElement.value.height = y.value - currentElement.value.y
   }
   handleDrawCanvas(canvas.value)
 }
 function handleMouseUp() {
-  elementType.value = 'rectangle'
-  if (currentElement.value === undefined)
-    return
-  currentElement.value.select = true
+  if (elementType.value === 'drag' || elementType.value === 'selection') {
+    if (elementType.value === 'selection')
+      elements.value.pop()
+    elementType.value = 'rectangle'
+  }
+  else {
+    currentElement.value!.select = true
+  }
   currentElement.value = undefined
   handleDrawCanvas(canvas.value)
 }
