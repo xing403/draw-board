@@ -13,6 +13,8 @@ declare global {
   const canDeleteElement: typeof import('./src/composables/variable')['canDeleteElement']
   const canvas: typeof import('./src/composables/variable')['canvas']
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
+  const checkInBox: typeof import('./src/utils/index')['checkInBox']
+  const clearAllSelect: typeof import('./src/composables/draw')['clearAllSelect']
   const clearSelection: typeof import('./src/composables/drawBoard')['clearSelection']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -34,6 +36,7 @@ declare global {
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createTemplatePromise: typeof import('@vueuse/core')['createTemplatePromise']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
+  const currentElement: typeof import('./src/composables/variable')['currentElement']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
@@ -60,14 +63,17 @@ declare global {
   const h: typeof import('vue')['h']
   const handleChangeDrawType: typeof import('./src/composables/drawBoard')['handleChangeDrawType']
   const handleDeleteSelectionElement: typeof import('./src/composables/drawBoard')['handleDeleteSelectionElement']
+  const handleDrawCanvas: typeof import('./src/composables/draw')['handleDrawCanvas']
   const handleMouseDown: typeof import('./src/composables/drawBoard')['handleMouseDown']
   const handleMouseMove: typeof import('./src/composables/drawBoard')['handleMouseMove']
   const handleMouseUp: typeof import('./src/composables/drawBoard')['handleMouseUp']
   const handleMoveSelectionElement: typeof import('./src/composables/drawBoard')['handleMoveSelectionElement']
   const handleSelectionAllElement: typeof import('./src/composables/drawBoard')['handleSelectionAllElement']
+  const hasSelected: typeof import('./src/utils/index')['hasSelected']
   const helpTips: typeof import('./src/composables/index')['helpTips']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const initKeyStroke: typeof import('./src/composables/keyStroke')['initKeyStroke']
+  const initializeGraph: typeof import('./src/composables/draw')['initializeGraph']
   const inject: typeof import('vue')['inject']
   const isDark: typeof import('./src/composables/config')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
@@ -108,6 +114,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const processingShape: typeof import('./src/composables/draw')['processingShape']
   const provide: typeof import('vue')['provide']
   const rc: typeof import('./src/composables/variable')['rc']
   const reactify: typeof import('@vueuse/core')['reactify']
@@ -334,6 +341,8 @@ declare global {
   const watchTriggerable: typeof import('@vueuse/core')['watchTriggerable']
   const watchWithFilter: typeof import('@vueuse/core')['watchWithFilter']
   const whenever: typeof import('@vueuse/core')['whenever']
+  const x: typeof import('./src/composables/variable')['x']
+  const y: typeof import('./src/composables/variable')['y']
 }
 // for type re-export
 declare global {
@@ -349,6 +358,8 @@ declare module 'vue' {
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
+    readonly checkInBox: UnwrapRef<typeof import('./src/utils/index')['checkInBox']>
+    readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -366,6 +377,7 @@ declare module 'vue' {
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly currentElement: UnwrapRef<typeof import('./src/composables/variable')['currentElement']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
@@ -375,12 +387,17 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly elementType: UnwrapRef<typeof import('./src/composables/config')['elementType']>
+    readonly elements: UnwrapRef<typeof import('./src/composables/variable')['elements']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly generator: UnwrapRef<typeof import('./src/composables/variable')['generator']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
+    readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
@@ -388,6 +405,8 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly lastX: UnwrapRef<typeof import('./src/composables/variable')['lastX']>
+    readonly lastY: UnwrapRef<typeof import('./src/composables/variable')['lastY']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
@@ -416,7 +435,9 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly processingShape: UnwrapRef<typeof import('./src/composables/draw')['processingShape']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly rc: UnwrapRef<typeof import('./src/composables/variable')['rc']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -635,6 +656,8 @@ declare module 'vue' {
     readonly watchTriggerable: UnwrapRef<typeof import('@vueuse/core')['watchTriggerable']>
     readonly watchWithFilter: UnwrapRef<typeof import('@vueuse/core')['watchWithFilter']>
     readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
+    readonly x: UnwrapRef<typeof import('./src/composables/variable')['x']>
+    readonly y: UnwrapRef<typeof import('./src/composables/variable')['y']>
   }
 }
 declare module '@vue/runtime-core' {
@@ -644,6 +667,8 @@ declare module '@vue/runtime-core' {
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
+    readonly checkInBox: UnwrapRef<typeof import('./src/utils/index')['checkInBox']>
+    readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -661,6 +686,7 @@ declare module '@vue/runtime-core' {
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly currentElement: UnwrapRef<typeof import('./src/composables/variable')['currentElement']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
@@ -670,12 +696,17 @@ declare module '@vue/runtime-core' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly elementType: UnwrapRef<typeof import('./src/composables/config')['elementType']>
+    readonly elements: UnwrapRef<typeof import('./src/composables/variable')['elements']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly generator: UnwrapRef<typeof import('./src/composables/variable')['generator']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
+    readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
@@ -683,6 +714,8 @@ declare module '@vue/runtime-core' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly lastX: UnwrapRef<typeof import('./src/composables/variable')['lastX']>
+    readonly lastY: UnwrapRef<typeof import('./src/composables/variable')['lastY']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
@@ -711,7 +744,9 @@ declare module '@vue/runtime-core' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly processingShape: UnwrapRef<typeof import('./src/composables/draw')['processingShape']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly rc: UnwrapRef<typeof import('./src/composables/variable')['rc']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -930,5 +965,7 @@ declare module '@vue/runtime-core' {
     readonly watchTriggerable: UnwrapRef<typeof import('@vueuse/core')['watchTriggerable']>
     readonly watchWithFilter: UnwrapRef<typeof import('@vueuse/core')['watchWithFilter']>
     readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
+    readonly x: UnwrapRef<typeof import('./src/composables/variable')['x']>
+    readonly y: UnwrapRef<typeof import('./src/composables/variable')['y']>
   }
 }

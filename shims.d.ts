@@ -3,7 +3,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-type ElementType = 'rectangle' | 'ellipse'
+type ElementType = 'rectangle' | 'ellipse' | 'drag'
 interface ElementGraph {
   type: ElementType
   x: number
@@ -12,4 +12,8 @@ interface ElementGraph {
   height: number
   select: boolean
   draw?: (rc: any, context: any) => void
+}
+interface Point {
+  x: number
+  y: number
 }
