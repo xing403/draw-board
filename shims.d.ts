@@ -3,7 +3,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection'
+type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection' | 'line' | 'arrow'
 interface ElementGraph {
   type: ElementType
   x: number

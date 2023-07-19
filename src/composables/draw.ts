@@ -50,7 +50,7 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
  */
 export function initializeGraph(type: ElementType, x: number, y: number) {
   const element: ElementGraph = {
-    type, x, y, width: 0, height: 0, select: false, draw: () => {},
+    type, x, y, width: 0, height: 0, select: false, draw: () => { },
   }
   return element
 }
@@ -61,34 +61,64 @@ export function initializeGraph(type: ElementType, x: number, y: number) {
 export function processingShape(element: ElementGraph) {
   if (rc.value == null)
     return
-  let shape: Drawable
-  switch (element.type) {
-    case 'selection':
-      element.draw = (rc, context) => {
-        const fillStyle = context.fillStyle
-        context.fillStyle = 'rgba(0, 0, 255, 0.10)'
-        context.fillRect(element.x, element.y, element.width, element.height)
-        context.fillStyle = fillStyle
-      }
-      break
-    case 'rectangle':
-      shape = generator.rectangle(0, 0, element.width, element.height)
-      element.draw = (rc, context) => {
-        context.translate(element.x, element.y)
-        rc.draw(shape)
-        context.translate(-element.x, -element.y)
-      }
-      break
-    case 'ellipse':
-      shape = generator.ellipse(element.width / 2, element.height / 2, element.width, element.height)
-      element.draw = (rc, context) => {
-        context.translate(element.x, element.y)
-        rc.draw(shape)
-        context.translate(-element.x, -element.y)
-      }
-      break
+  let shape: Drawable | Drawable[]
+  if (element.type === 'selection') {
+    element.draw = (rc, context) => {
+      const fillStyle = context.fillStyle
+      context.fillStyle = 'rgba(0, 0, 255, 0.10)'
+      context.fillRect(element.x, element.y, element.width, element.height)
+      context.fillStyle = fillStyle
+    }
+  }
+  else if (element.type === 'rectangle') {
+    shape = generator.rectangle(0, 0, element.width, element.height)
+    element.draw = (rc, context) => {
+      context.translate(element.x, element.y)
+      rc.draw(shape)
+      context.translate(-element.x, -element.y)
+    }
+  }
+  else if (element.type === 'ellipse') {
+    shape = generator.ellipse(element.width / 2, element.height / 2, element.width, element.height)
+    element.draw = (rc, context) => {
+      context.translate(element.x, element.y)
+      rc.draw(shape)
+      context.translate(-element.x, -element.y)
+    }
+  }
+  else if (element.type === 'line') {
+    shape = generator.line(0, 0, element.width, element.height)
+    element.draw = (rc, context) => {
+      context.translate(element.x, element.y)
+      rc.draw(shape)
+      context.translate(-element.x, -element.y)
+    }
+  }
+  else if (element.type === 'arrow') {
+    const x1 = 0
+    const y1 = 0
+    const x2 = element.width
+    const y2 = element.height
+
+    const size = 30
+    const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    const minSize = Math.min(size, distance / 2)
+    const xs = x2 - ((x2 - x1) / distance) * minSize
+    const ys = y2 - ((y2 - y1) / distance) * minSize
+    const angle = 20 // degrees
+    const [x3, y3] = rotate(xs, ys, x2, y2, (-angle * Math.PI) / 180)
+    const [x4, y4] = rotate(xs, ys, x2, y2, (angle * Math.PI) / 180)
+
+    shape = [
+      generator.line(x3, y3, x2, y2),
+      generator.line(x1, y1, x2, y2),
+      generator.line(x4, y4, x2, y2),
+    ]
+
+    element.draw = (rc, context) => {
+      context.translate(element.x, element.y)
+      shape.forEach(s => rc.draw(s))
+      context.translate(-element.x, -element.y)
+    }
   }
 }
-/**
- * 删除选中的元素
- */

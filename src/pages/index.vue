@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const WIDTH = window.innerWidth
-const HEIGHT = window.innerHeight
-
 const canvas = ref()
 const rightClickRef = ref()
+
+watchArray([width, height], () => {
+  handleDrawCanvas(canvas.value)
+})
 
 function handleMouseDown() {
   const [selectLen, selects] = hasSelected()
@@ -85,7 +86,7 @@ onMounted(() => {
       </div>
     </div>
     <canvas
-      ref="canvas" :width="WIDTH" :height="HEIGHT"
+      ref="canvas" :width="width" :height="height"
       @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
       @mouseup="handleMouseUp"

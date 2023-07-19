@@ -74,6 +74,7 @@ declare global {
   const handleMoveSelectionElement: typeof import('./src/composables/drawBoard')['handleMoveSelectionElement']
   const handleSelectionAllElement: typeof import('./src/composables/drawBoard')['handleSelectionAllElement']
   const hasSelected: typeof import('./src/utils/index')['hasSelected']
+  const height: typeof import('./src/composables/config')['height']
   const helpTips: typeof import('./src/composables/index')['helpTips']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const initKeyStroke: typeof import('./src/composables/keyStroke')['initKeyStroke']
@@ -138,7 +139,7 @@ declare global {
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const rightClickBoxPos: typeof import('./src/composables/config')['rightClickBoxPos']
-  const rotate: typeof import('./src/utils/draw')['rotate']
+  const rotate: typeof import('./src/utils/index')['rotate']
   const selectionType: typeof import('./src/composables/variable')['selectionType']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
@@ -346,6 +347,7 @@ declare global {
   const watchTriggerable: typeof import('@vueuse/core')['watchTriggerable']
   const watchWithFilter: typeof import('@vueuse/core')['watchWithFilter']
   const whenever: typeof import('@vueuse/core')['whenever']
+  const width: typeof import('./src/composables/config')['width']
   const x: typeof import('./src/composables/config')['x']
   const y: typeof import('./src/composables/config')['y']
 }
@@ -403,6 +405,7 @@ declare module 'vue' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
+    readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -462,6 +465,7 @@ declare module 'vue' {
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly rightClickBoxPos: UnwrapRef<typeof import('./src/composables/config')['rightClickBoxPos']>
+    readonly rotate: UnwrapRef<typeof import('./src/utils/index')['rotate']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
@@ -664,6 +668,7 @@ declare module 'vue' {
     readonly watchTriggerable: UnwrapRef<typeof import('@vueuse/core')['watchTriggerable']>
     readonly watchWithFilter: UnwrapRef<typeof import('@vueuse/core')['watchWithFilter']>
     readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
+    readonly width: UnwrapRef<typeof import('./src/composables/config')['width']>
     readonly x: UnwrapRef<typeof import('./src/composables/config')['x']>
     readonly y: UnwrapRef<typeof import('./src/composables/config')['y']>
   }
@@ -715,6 +720,7 @@ declare module '@vue/runtime-core' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
+    readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -774,6 +780,7 @@ declare module '@vue/runtime-core' {
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly rightClickBoxPos: UnwrapRef<typeof import('./src/composables/config')['rightClickBoxPos']>
+    readonly rotate: UnwrapRef<typeof import('./src/utils/index')['rotate']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
@@ -976,6 +983,7 @@ declare module '@vue/runtime-core' {
     readonly watchTriggerable: UnwrapRef<typeof import('@vueuse/core')['watchTriggerable']>
     readonly watchWithFilter: UnwrapRef<typeof import('@vueuse/core')['watchWithFilter']>
     readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
+    readonly width: UnwrapRef<typeof import('./src/composables/config')['width']>
     readonly x: UnwrapRef<typeof import('./src/composables/config')['x']>
     readonly y: UnwrapRef<typeof import('./src/composables/config')['y']>
   }
