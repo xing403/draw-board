@@ -22,9 +22,3 @@ const { style } = useDraggable(toolBar, {
     <button i-mdi-arrow-top-right btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'arrow' }" @click="changeDrawMode('arrow')" />
   </div>
 </template>
-
-<style>
-*{
-  border-radius: ;
-}
-</style>

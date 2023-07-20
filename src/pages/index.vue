@@ -80,8 +80,9 @@ onMounted(() => {
 <template>
   <div overflow="hidden">
     <tool-bar />
-    <div fixed bottom="30px" right="20px">
-      <div flex="~ col" w-full>
+    <div fixed bottom-30px right-20px>
+      <div flex="~ col gap-1" w-full>
+        <help />
         <button i-carbon-sun dark:i-carbon-moon btn icon-btn @click="toggleDark()" />
       </div>
     </div>
