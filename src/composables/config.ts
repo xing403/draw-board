@@ -21,3 +21,6 @@ export const rightClickBoxPos = ref({
   y: 0,
   display: 'none',
 })
+export const config = ref({
+  canMove: false,
+})

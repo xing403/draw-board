@@ -21,6 +21,7 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
 
   if (currentElement.value !== undefined)
     processingShape(currentElement.value)
+
   elements.value.forEach((element: ElementGraph) => {
     element.draw(rc.value, context)
     if (element.select) {
@@ -117,7 +118,7 @@ export function processingShape(element: ElementGraph) {
 
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
-      shape.forEach(s => rc.draw(s))
+      shape.forEach((s: any) => rc.draw(s))
       context.translate(-element.x, -element.y)
     }
   }

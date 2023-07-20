@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const canvas = ref()
 const rightClickRef = ref()
-
 watchArray([width, height], () => {
   handleDrawCanvas(canvas.value)
 })
@@ -18,11 +17,14 @@ function handleMouseDown() {
       ? 'drag'
       : elementType.value
   }
-  if (elementType.value !== 'drag') {
+  if (elementType.value !== 'drag' && elementType.value !== 'move') {
     clearAllSelect()
     currentElement.value = initializeGraph(elementType.value, x.value, y.value)
     elements.value.push(currentElement.value)
     handleDrawCanvas(canvas.value)
+  }
+  else if (elementType.value === 'move') {
+    config.value.canMove = true
   }
   else {
     lastX.value = x.value
@@ -36,6 +38,14 @@ function handleMouseMove() {
         element.x = element.x + x.value - lastX.value
         element.y = element.y + y.value - lastY.value
       }
+    })
+    lastX.value = x.value
+    lastY.value = y.value
+  }
+  else if (elementType.value === 'move' && config.value.canMove) {
+    elements.value.forEach((element) => {
+      element.x = element.x + x.value - lastX.value
+      element.y = element.y + y.value - lastY.value
     })
     lastX.value = x.value
     lastY.value = y.value
@@ -55,6 +65,7 @@ function handleMouseMove() {
   handleDrawCanvas(canvas.value)
 }
 function handleMouseUp() {
+  config.value.canMove = false
   if (elementType.value === 'drag' || elementType.value === 'selection') {
     if (elementType.value === 'selection')
       elements.value.pop()
@@ -63,6 +74,7 @@ function handleMouseUp() {
   else {
     currentElement.value!.select = true
   }
+
   currentElement.value = undefined
   handleDrawCanvas(canvas.value)
 }
