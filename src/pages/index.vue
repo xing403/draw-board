@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ElementGraph } from 'shims'
+
 const canvas = ref()
 const rightClickRef = ref()
 watchArray([width, height], () => {
@@ -12,7 +14,7 @@ function handleMouseDown() {
   if (selectLen) {
     // 点击的位置在某个选中元素内部执行拖拽
     elementType.value = selects.some((element) => {
-      return checkPointInBox(element, { x: x.value, y: y.value })
+      return checkPointInBox(element, [x.value, y.value])
     })
       ? 'drag'
       : elementType.value
@@ -30,22 +32,21 @@ function handleMouseDown() {
     lastX.value = x.value
     lastY.value = y.value
   }
+
+  rightClickBoxPos.value.display = 'none'
 }
 function handleMouseMove() {
   if (elementType.value === 'drag') {
     elements.value.forEach((element) => {
-      if (element.select) {
-        element.x = element.x + x.value - lastX.value
-        element.y = element.y + y.value - lastY.value
-      }
+      if (element.select)
+        moveElement(element)
     })
     lastX.value = x.value
     lastY.value = y.value
   }
   else if (elementType.value === 'move' && config.value.canMove) {
     elements.value.forEach((element) => {
-      element.x = element.x + x.value - lastX.value
-      element.y = element.y + y.value - lastY.value
+      moveElement(element)
     })
     lastX.value = x.value
     lastY.value = y.value
@@ -59,11 +60,22 @@ function handleMouseMove() {
           element.select = true
       })
     }
-    else if (elementType.value === 'freeDraw') {
-      currentElement.value?.points?.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
-    }
+
     currentElement.value.width = x.value - currentElement.value.x
     currentElement.value.height = y.value - currentElement.value.y
+    if (elementType.value === 'freeDraw') {
+      currentElement.value?.points?.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
+
+      const [x1, y1] = currentElement.value.area.p1
+      const [x2, y2] = currentElement.value.area.p2
+      currentElement.value.area.p1 = [Math.min(x1, x.value), Math.min(y1, y.value)]
+      currentElement.value.area.p2 = [Math.max(x2, x.value), Math.max(y2, y.value)]
+    }
+    else {
+      const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
+      currentElement.value.area.p1 = [x1, y1]
+      currentElement.value.area.p2 = [x2, y2]
+    }
   }
   handleDrawCanvas(canvas.value)
 }
@@ -74,7 +86,7 @@ function handleMouseUp() {
       elements.value.pop()
     elementType.value = 'rectangle'
   }
-  else {
+  else if (currentElement.value) {
     currentElement.value!.select = true
   }
 

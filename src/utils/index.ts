@@ -1,3 +1,6 @@
+import type { Point } from 'roughjs/bin/geometry'
+import type { ElementGraph } from 'shims'
+
 /**
  * 判断点在 box 内部
  * @param element
@@ -6,7 +9,7 @@
  */
 export function checkPointInBox(element: ElementGraph, point: Point) {
   const [x1, y1, x2, y2] = FormatGraphPoint(element)
-  return x1 <= point.x && y1 <= point.y && x2 >= point.x && y2 >= point.y
+  return x1 <= point[0] && y1 <= point[1] && x2 >= point[0] && y2 >= point[1]
 }
 /**
  * 判断e1 在 e2 内部
@@ -20,7 +23,7 @@ export function checkBoxInBox(e1: ElementGraph, e2: ElementGraph) {
   return x1 >= x3 && y1 >= y3 && x2 <= x4 && y2 <= y4
 }
 /**
- * 格式化元素点信息，左上角(x1, y1),右下角(x2, y2)
+ * 格式化元素除freeDraw之外点信息，左上角(x1, y1),右下角(x2, y2)
  * @param element 元素
  * @returns
  */
@@ -49,4 +52,14 @@ export function rotate(x1: number, y1: number, x2: number, y2: number, angle: nu
     (x1 - x2) * Math.cos(angle) - (y1 - y2) * Math.sin(angle) + x2,
     (x1 - x2) * Math.sin(angle) + (y1 - y2) * Math.cos(angle) + y2,
   ]
+}
+export function moveElement(element: ElementGraph) {
+  const distanceX = x.value - lastX.value
+  const distanceY = y.value - lastY.value
+  element.x += distanceX
+  element.y += distanceY
+  element.area.p1[0] += distanceX
+  element.area.p1[1] += distanceY
+  element.area.p2[0] += distanceX
+  element.area.p2[1] += distanceY
 }

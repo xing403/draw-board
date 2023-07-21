@@ -1,6 +1,7 @@
 import rough from 'roughjs'
 import type { Drawable } from 'roughjs/bin/core'
 import type { Point } from 'roughjs/bin/geometry'
+import type { ElementGraph, ElementType } from 'shims'
 
 /** 清除所有选择的元素
  */
@@ -28,10 +29,10 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
     if (element.select) {
       const margin = 4
       context.setLineDash([8, 4])
-      const x = Math.min(element.x, element.x + element.width)
-      const y = Math.min(element.y, element.y + element.height)
-      const width = Math.max(element.x, element.x + element.width) - x
-      const height = Math.max(element.y, element.y + element.height) - y
+      const [x, y] = element.area.p1
+      const width = element.area.p2[0] - x
+      const height = element.area.p2[1] - y
+
       context.strokeRect(
         x - margin,
         y - margin,
@@ -52,7 +53,15 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
  */
 export function initializeGraph(type: ElementType, x: number, y: number) {
   const element: ElementGraph = {
-    type, x, y, width: 0, height: 0, select: false, draw: () => { }, points: [],
+    type,
+    x,
+    y,
+    width: 0,
+    height: 0,
+    select: false,
+    draw: () => { },
+    points: [],
+    area: { p1: [x, y], p2: [x, y] },
   }
   return element
 }
@@ -119,7 +128,8 @@ export function processingShape(element: ElementGraph) {
 
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
-      shape.forEach((s: any) => rc.draw(s))
+      const shapes = shape as Drawable[]
+      shapes.forEach((s: any) => rc.draw(s))
       context.translate(-element.x, -element.y)
     }
   }

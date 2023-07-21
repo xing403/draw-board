@@ -1,3 +1,5 @@
+import { Point } from 'roughjs/bin/geometry'
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
@@ -12,5 +14,9 @@ interface ElementGraph {
   height: number
   select: boolean
   points?: Point[]
+  area: {
+    p1:Point
+    p2:Point
+  }
   draw: (rc: any, context: any) => void
 }
