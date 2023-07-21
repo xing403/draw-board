@@ -59,6 +59,9 @@ function handleMouseMove() {
           element.select = true
       })
     }
+    else if (elementType.value === 'freeDraw') {
+      currentElement.value?.points?.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
+    }
     currentElement.value.width = x.value - currentElement.value.x
     currentElement.value.height = y.value - currentElement.value.y
   }

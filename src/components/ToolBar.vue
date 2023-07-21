@@ -23,5 +23,7 @@ const { style } = useDraggable(toolBar, {
     <button i-mdi-vector-line btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'line' }" @click="changeDrawMode('line')" />
     <el-divider direction="vertical" />
     <button i-mdi-arrow-top-right btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'arrow' }" @click="changeDrawMode('arrow')" />
+    <el-divider direction="vertical" />
+    <button i-mdi-pencil btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'freeDraw' }" @click="changeDrawMode('freeDraw')" />
   </div>
 </template>

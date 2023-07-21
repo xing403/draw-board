@@ -1,5 +1,6 @@
 import rough from 'roughjs'
 import type { Drawable } from 'roughjs/bin/core'
+import type { Point } from 'roughjs/bin/geometry'
 
 /** 清除所有选择的元素
  */
@@ -51,7 +52,7 @@ export function handleDrawCanvas(canvas: HTMLCanvasElement) {
  */
 export function initializeGraph(type: ElementType, x: number, y: number) {
   const element: ElementGraph = {
-    type, x, y, width: 0, height: 0, select: false, draw: () => { },
+    type, x, y, width: 0, height: 0, select: false, draw: () => { }, points: [],
   }
   return element
 }
@@ -119,6 +120,14 @@ export function processingShape(element: ElementGraph) {
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
       shape.forEach((s: any) => rc.draw(s))
+      context.translate(-element.x, -element.y)
+    }
+  }
+  else if (element.type === 'freeDraw') {
+    shape = generator.linearPath(element.points as Point[])
+    element.draw = (rc, context) => {
+      context.translate(element.x, element.y)
+      rc.draw(shape)
       context.translate(-element.x, -element.y)
     }
   }
