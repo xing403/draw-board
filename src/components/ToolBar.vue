@@ -8,8 +8,9 @@ const { style } = useDraggable(toolBar, {
 
 <template>
   <div
-    ref="toolBar" :style="style" b="1px solid gray-400" cursor="pointer" fixed
-    select-none b-rd-5px bg-white p-10px shadow="~ hover:lg"
+    ref="toolBar" :style="style"
+    b="1px solid gray-400" cursor="pointer"
+    fixed select-none b-rd-5px bg-gray-200 bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
   >
     <button i-mdi-cursor-move btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'move' }" @click="changeDrawMode('move')" />
     <el-divider direction="vertical" />

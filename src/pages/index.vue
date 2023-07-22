@@ -118,6 +118,7 @@ function handleTouchUp() {
     </div>
     <canvas
       ref="canvas" :width="width" :height="height"
+      bg-white dark:bg-gray-8
       @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
       @mouseup="handleMouseUp"

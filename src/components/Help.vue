@@ -8,7 +8,7 @@ const helpDialog = ref(false)
     <el-descriptions :column="1" border>
       <el-descriptions-item label="删除元素">
         <div flex justify="end">
-          <el-tag size="normal">
+          <el-tag size="small">
             Del
           </el-tag>
         </div>
