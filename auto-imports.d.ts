@@ -406,6 +406,7 @@ declare module 'vue' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleDeleteElements: UnwrapRef<typeof import('./src/composables/draw')['handleDeleteElements']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>
@@ -723,6 +724,7 @@ declare module '@vue/runtime-core' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleDeleteElements: UnwrapRef<typeof import('./src/composables/draw')['handleDeleteElements']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>

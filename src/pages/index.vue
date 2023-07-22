@@ -112,7 +112,7 @@ function handleTouchUp() {
     <tool-bar />
     <div fixed bottom-30px right-20px>
       <div flex="~ col gap-1" w-full>
-        <help />
+        <help :canvas="canvas" />
         <button i-carbon-sun dark:i-carbon-moon btn icon-btn @click="toggleDark()" />
       </div>
     </div>

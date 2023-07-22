@@ -142,3 +142,11 @@ export function processingShape(element: ElementGraph) {
     }
   }
 }
+/**
+ * 删除元素
+ */
+export function handleDeleteElements(canvas: HTMLCanvasElement) {
+  elements.value = elements.value.filter(element => !element.select)
+  handleDrawCanvas(canvas)
+  rightClickBoxPos.value.display = 'none'
+}
