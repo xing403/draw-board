@@ -28,10 +28,6 @@ function handleMouseDown() {
   else if (elementType.value === 'move') {
     config.value.canMove = true
   }
-  else {
-    lastX.value = x.value
-    lastY.value = y.value
-  }
 
   rightClickBoxPos.value.display = 'none'
 }
@@ -41,15 +37,11 @@ function handleMouseMove() {
       if (element.select)
         moveElement(element)
     })
-    lastX.value = x.value
-    lastY.value = y.value
   }
   else if (elementType.value === 'move' && config.value.canMove) {
     elements.value.forEach((element) => {
       moveElement(element)
     })
-    lastX.value = x.value
-    lastY.value = y.value
   }
   else {
     if (currentElement.value == null)
@@ -77,6 +69,8 @@ function handleMouseMove() {
       currentElement.value.area.p2 = [x2, y2]
     }
   }
+  lastX.value = x.value
+  lastY.value = y.value
   handleDrawCanvas(canvas.value)
 }
 function handleMouseUp() {
@@ -84,16 +78,12 @@ function handleMouseUp() {
   if (elementType.value === 'drag' || elementType.value === 'selection') {
     if (elementType.value === 'selection')
       elements.value.pop()
-    elementType.value = 'rectangle'
-  }
-  else if (currentElement.value) {
-    currentElement.value!.select = true
   }
 
   currentElement.value = undefined
   handleDrawCanvas(canvas.value)
 }
-function handleRightClick(event: { preventDefault: () => void }) {
+function handleRightClick(event: MouseEvent) {
   event.preventDefault()
   rightClickBoxPos.value.x = x.value
   rightClickBoxPos.value.y = y.value
@@ -102,6 +92,19 @@ function handleRightClick(event: { preventDefault: () => void }) {
 onMounted(() => {
   handleDrawCanvas(canvas.value)
 })
+function handleTouchDown(e: TouchEvent) {
+  if (e.touches.length === 1) {
+    x.value = e.touches[0].clientX
+    y.value = e.touches[0].clientY
+    handleMouseDown()
+  }
+}
+function handleTouchMove() {
+  handleMouseMove()
+}
+function handleTouchUp() {
+  handleMouseUp()
+}
 </script>
 
 <template>
@@ -119,6 +122,9 @@ onMounted(() => {
       @mousemove="handleMouseMove"
       @mouseup="handleMouseUp"
       @contextmenu="handleRightClick"
+      @touchstart="handleTouchDown"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchUp"
     />
     <right-click ref="rightClickRef" :canvas="canvas" :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }" />
   </div>
