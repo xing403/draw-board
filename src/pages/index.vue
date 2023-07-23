@@ -48,8 +48,7 @@ function handleMouseMove() {
       return
     if (elementType.value === 'selection') {
       elements.value.forEach((element) => {
-        if (checkBoxInBox(element, currentElement.value as ElementGraph))
-          element.select = true
+        element.select = checkBoxInBox(element, currentElement.value as ElementGraph)
       })
     }
 
@@ -58,8 +57,7 @@ function handleMouseMove() {
     if (elementType.value === 'freeDraw') {
       currentElement.value?.points?.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
 
-      const [x1, y1] = currentElement.value.area.p1
-      const [x2, y2] = currentElement.value.area.p2
+      const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
       currentElement.value.area.p1 = [Math.min(x1, x.value), Math.min(y1, y.value)]
       currentElement.value.area.p2 = [Math.max(x2, x.value), Math.max(y2, y.value)]
     }
@@ -75,11 +73,9 @@ function handleMouseMove() {
 }
 function handleMouseUp() {
   config.value.canMove = false
-  if (elementType.value === 'drag' || elementType.value === 'selection') {
-    if (elementType.value === 'selection')
-      elements.value.pop()
-  }
-
+  if (elementType.value === 'selection')
+    elements.value.pop()
+  elementType.value = 'selection'
   currentElement.value = undefined
   handleDrawCanvas(canvas.value)
 }

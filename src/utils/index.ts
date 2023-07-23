@@ -28,10 +28,17 @@ export function checkBoxInBox(e1: ElementGraph, e2: ElementGraph) {
  * @returns
  */
 export function FormatGraphPoint(element: ElementGraph) {
-  const x1 = Math.min(element.x, element.x + element.width)
-  const y1 = Math.min(element.y, element.y + element.height)
-  const x2 = Math.max(element.x, element.x + element.width)
-  const y2 = Math.max(element.y, element.y + element.height)
+  let x1, y1, x2, y2
+  if (element.type === 'freeDraw') {
+    [x1, y1] = element.area.p1;
+    [x2, y2] = element.area.p2
+  }
+  else {
+    x1 = Math.min(element.x, element.x + element.width)
+    y1 = Math.min(element.y, element.y + element.height)
+    x2 = Math.max(element.x, element.x + element.width)
+    y2 = Math.max(element.y, element.y + element.height)
+  }
   return [x1, y1, x2, y2]
 }
 export function hasSelected(): [number, ElementGraph[]] {
