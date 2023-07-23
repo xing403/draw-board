@@ -70,8 +70,6 @@ export function initializeGraph(type: ElementType, x: number, y: number) {
  * @returns
  */
 export function processingShape(element: ElementGraph) {
-  if (rc.value == null)
-    return
   let shape: Drawable | Drawable[]
   if (element.type === 'selection') {
     element.draw = (rc, context) => {
@@ -141,12 +139,28 @@ export function processingShape(element: ElementGraph) {
       context.translate(-element.x, -element.y)
     }
   }
+  return element
 }
 /**
  * 删除元素
  */
 export function handleDeleteElements(canvas: HTMLCanvasElement) {
-  elements.value = elements.value.filter(element => !element.select)
+  for (let i = 0; i < elements.value.length; i++) {
+    if (elements.value[i].select)
+      elements.value.splice(i, 1)
+  }
   handleDrawCanvas(canvas)
   rightClickBoxPos.value.display = 'none'
 }
+export function initDrawBoard(canvas: HTMLCanvasElement) {
+  history.value.forEach((element: ElementGraph) => {
+    processingShape(element)
+    if (element != null)
+      elements.value.push(element)
+  })
+  clearAllSelect()
+  handleDrawCanvas(canvas)
+}
+watch(elements.value, (value) => {
+  history.value = value
+})

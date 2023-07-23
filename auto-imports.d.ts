@@ -6,28 +6,19 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const FormatGraphPoint: typeof import('./src/utils/index')['FormatGraphPoint']
-  const WINDOW_HEIGHT: typeof import('./src/composables/variable')['WINDOW_HEIGHT']
-  const WINDOW_WIDTH: typeof import('./src/composables/variable')['WINDOW_WIDTH']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
-  const canDeleteElement: typeof import('./src/composables/variable')['canDeleteElement']
-  const canvas: typeof import('./src/composables/variable')['canvas']
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
   const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
-  const checkInBox: typeof import('./src/utils/index')['checkInBox']
   const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
   const clearAllSelect: typeof import('./src/composables/draw')['clearAllSelect']
-  const clearSelection: typeof import('./src/composables/drawBoard')['clearSelection']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
   const config: typeof import('./src/composables/config')['config']
-  const configDrawDrawer: typeof import('./src/composables/config')['configDrawDrawer']
-  const configDrawer: typeof import('./src/composables/config')['configDrawer']
-  const context: typeof import('./src/composables/variable')['context']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
@@ -44,51 +35,34 @@ declare global {
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
-  const deepCopy: typeof import('./src/utils/tools')['deepCopy']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
-  const drawScene: typeof import('./src/composables/drawBoard')['drawScene']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const elementType: typeof import('./src/composables/config')['elementType']
   const elements: typeof import('./src/composables/config')['elements']
-  const exportAsPNG: typeof import('./src/composables/drawBoard')['exportAsPNG']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const generateShape: typeof import('./src/composables/drawBoard')['generateShape']
   const generator: typeof import('./src/composables/config')['generator']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
-  const getElementAbsoluteX1: typeof import('./src/utils/draw')['getElementAbsoluteX1']
-  const getElementAbsoluteX2: typeof import('./src/utils/draw')['getElementAbsoluteX2']
-  const getElementAbsoluteY1: typeof import('./src/utils/draw')['getElementAbsoluteY1']
-  const getElementAbsoluteY2: typeof import('./src/utils/draw')['getElementAbsoluteY2']
   const h: typeof import('vue')['h']
-  const handleChangeDrawType: typeof import('./src/composables/drawBoard')['handleChangeDrawType']
   const handleDeleteElements: typeof import('./src/composables/draw')['handleDeleteElements']
-  const handleDeleteSelectionElement: typeof import('./src/composables/drawBoard')['handleDeleteSelectionElement']
   const handleDrawCanvas: typeof import('./src/composables/draw')['handleDrawCanvas']
-  const handleMouseDown: typeof import('./src/composables/drawBoard')['handleMouseDown']
-  const handleMouseMove: typeof import('./src/composables/drawBoard')['handleMouseMove']
-  const handleMouseUp: typeof import('./src/composables/drawBoard')['handleMouseUp']
-  const handleMoveSelectionElement: typeof import('./src/composables/drawBoard')['handleMoveSelectionElement']
-  const handleSelectionAllElement: typeof import('./src/composables/drawBoard')['handleSelectionAllElement']
   const hasSelected: typeof import('./src/utils/index')['hasSelected']
   const height: typeof import('./src/composables/config')['height']
-  const helpTips: typeof import('./src/composables/index')['helpTips']
+  const history: typeof import('./src/composables/config')['history']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
-  const initKeyStroke: typeof import('./src/composables/keyStroke')['initKeyStroke']
+  const initDrawBoard: typeof import('./src/composables/draw')['initDrawBoard']
   const initializeGraph: typeof import('./src/composables/draw')['initializeGraph']
   const inject: typeof import('vue')['inject']
   const isDark: typeof import('./src/composables/config')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
-  const isDraggingElements: typeof import('./src/composables/variable')['isDraggingElements']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
-  const keyboardShortcuts: typeof import('./src/composables/keysMap')['keyboardShortcuts']
   const lastX: typeof import('./src/composables/config')['lastX']
   const lastY: typeof import('./src/composables/config')['lastY']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
@@ -99,7 +73,6 @@ declare global {
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
   const moveElement: typeof import('./src/utils/index')['moveElement']
-  const newElement: typeof import('./src/composables/drawBoard')['newElement']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -142,10 +115,8 @@ declare global {
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const rightClickBoxPos: typeof import('./src/composables/config')['rightClickBoxPos']
   const rotate: typeof import('./src/utils/index')['rotate']
-  const selectionType: typeof import('./src/composables/variable')['selectionType']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
-  const setSelection: typeof import('./src/composables/drawBoard')['setSelection']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -160,10 +131,7 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
-  const toggleConfigDraw: typeof import('./src/composables/config')['toggleConfigDraw']
-  const toggleConfigDrawer: typeof import('./src/composables/config')['toggleConfigDrawer']
   const toggleDark: typeof import('./src/composables/config')['toggleDark']
-  const toggleHelp: typeof import('./src/composables/index')['toggleHelp']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
@@ -410,7 +378,9 @@ declare module 'vue' {
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>
+    readonly history: UnwrapRef<typeof import('./src/composables/config')['history']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initDrawBoard: UnwrapRef<typeof import('./src/composables/draw')['initDrawBoard']>
     readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>
@@ -728,7 +698,9 @@ declare module '@vue/runtime-core' {
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
     readonly hasSelected: UnwrapRef<typeof import('./src/utils/index')['hasSelected']>
     readonly height: UnwrapRef<typeof import('./src/composables/config')['height']>
+    readonly history: UnwrapRef<typeof import('./src/composables/config')['history']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initDrawBoard: UnwrapRef<typeof import('./src/composables/draw')['initDrawBoard']>
     readonly initializeGraph: UnwrapRef<typeof import('./src/composables/draw')['initializeGraph']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/config')['isDark']>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RoughCanvas } from 'roughjs/bin/canvas'
 import type { ElementGraph } from 'shims'
 
 const canvas = ref()
@@ -86,7 +87,8 @@ function handleRightClick(event: MouseEvent) {
   rightClickBoxPos.value.display = 'block'
 }
 onMounted(() => {
-  handleDrawCanvas(canvas.value)
+  rc.value = new RoughCanvas(canvas.value)
+  initDrawBoard(canvas.value)
 })
 function handleTouchDown(e: TouchEvent) {
   if (e.touches.length === 1) {
