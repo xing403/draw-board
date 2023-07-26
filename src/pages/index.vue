@@ -2,10 +2,10 @@
 import { RoughCanvas } from 'roughjs/bin/canvas'
 import type { ElementGraph } from 'shims'
 
-const canvas = ref()
+const canvasRef = ref()
 const rightClickRef = ref()
 watchArray([width, height], () => {
-  handleDrawCanvas(canvas.value)
+  handleDrawCanvas()
 })
 
 function handleMouseDown() {
@@ -24,7 +24,7 @@ function handleMouseDown() {
     clearAllSelect()
     currentElement.value = initializeGraph(elementType.value, x.value, y.value)
     elements.value.push(currentElement.value)
-    handleDrawCanvas(canvas.value)
+    handleDrawCanvas()
   }
   else if (elementType.value === 'move') {
     config.value.canMove = true
@@ -70,15 +70,19 @@ function handleMouseMove() {
   }
   lastX.value = x.value
   lastY.value = y.value
-  handleDrawCanvas(canvas.value)
+  handleDrawCanvas()
 }
 function handleMouseUp() {
   config.value.canMove = false
   if (elementType.value === 'selection')
     elements.value.pop()
-  elementType.value = 'selection'
+  else
+    undoList.value.push([...elements.value])
+  if (elementType.value === 'drag')
+    elementType.value = 'selection'
   currentElement.value = undefined
-  handleDrawCanvas(canvas.value)
+  handleDrawCanvas()
+  redoList.value.splice(0, redoList.value.length)
 }
 function handleRightClick(event: MouseEvent) {
   event.preventDefault()
@@ -87,8 +91,10 @@ function handleRightClick(event: MouseEvent) {
   rightClickBoxPos.value.display = 'block'
 }
 onMounted(() => {
+  canvas.value = canvasRef.value as HTMLCanvasElement
   rc.value = new RoughCanvas(canvas.value)
-  initDrawBoard(canvas.value)
+  initDrawBoard()
+  undoList.value.push([...elements.value])
 })
 function handleTouchDown(e: TouchEvent) {
   if (e.touches.length === 1) {
@@ -110,12 +116,12 @@ function handleTouchUp() {
     <tool-bar />
     <div fixed bottom-30px right-20px>
       <div flex="~ col gap-1" w-full>
-        <help :canvas="canvas" />
+        <help />
         <button i-carbon-sun dark:i-carbon-moon btn icon-btn @click="toggleDark()" />
       </div>
     </div>
     <canvas
-      ref="canvas" :width="width" :height="height"
+      ref="canvasRef" :width="width" :height="height"
       bg-white dark:bg-gray-8
       @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
@@ -125,7 +131,7 @@ function handleTouchUp() {
       @touchmove="handleTouchMove"
       @touchend="handleTouchUp"
     />
-    <right-click ref="rightClickRef" :canvas="canvas" :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }" />
+    <right-click ref="rightClickRef" :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }" />
   </div>
 </template>
 

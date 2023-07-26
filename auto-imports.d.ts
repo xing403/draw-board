@@ -9,6 +9,9 @@ declare global {
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const canRedo: typeof import('./src/composables/config')['canRedo']
+  const canUndo: typeof import('./src/composables/config')['canUndo']
+  const canvas: typeof import('./src/composables/config')['canvas']
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
   const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
   const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
@@ -104,6 +107,7 @@ declare global {
   const reactiveOmit: typeof import('@vueuse/core')['reactiveOmit']
   const reactivePick: typeof import('@vueuse/core')['reactivePick']
   const readonly: typeof import('vue')['readonly']
+  const redoList: typeof import('./src/composables/config')['redoList']
   const ref: typeof import('vue')['ref']
   const refAutoReset: typeof import('@vueuse/core')['refAutoReset']
   const refDebounced: typeof import('@vueuse/core')['refDebounced']
@@ -138,6 +142,7 @@ declare global {
   const tryOnMounted: typeof import('@vueuse/core')['tryOnMounted']
   const tryOnScopeDispose: typeof import('@vueuse/core')['tryOnScopeDispose']
   const tryOnUnmounted: typeof import('@vueuse/core')['tryOnUnmounted']
+  const undoList: typeof import('./src/composables/config')['undoList']
   const unref: typeof import('vue')['unref']
   const unrefElement: typeof import('@vueuse/core')['unrefElement']
   const until: typeof import('@vueuse/core')['until']
@@ -335,6 +340,9 @@ declare module 'vue' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly canRedo: UnwrapRef<typeof import('./src/composables/config')['canRedo']>
+    readonly canUndo: UnwrapRef<typeof import('./src/composables/config')['canUndo']>
+    readonly canvas: UnwrapRef<typeof import('./src/composables/config')['canvas']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
@@ -430,6 +438,7 @@ declare module 'vue' {
     readonly reactiveOmit: UnwrapRef<typeof import('@vueuse/core')['reactiveOmit']>
     readonly reactivePick: UnwrapRef<typeof import('@vueuse/core')['reactivePick']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
+    readonly redoList: UnwrapRef<typeof import('./src/composables/config')['redoList']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly refAutoReset: UnwrapRef<typeof import('@vueuse/core')['refAutoReset']>
     readonly refDebounced: UnwrapRef<typeof import('@vueuse/core')['refDebounced']>
@@ -464,6 +473,7 @@ declare module 'vue' {
     readonly tryOnMounted: UnwrapRef<typeof import('@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('@vueuse/core')['tryOnUnmounted']>
+    readonly undoList: UnwrapRef<typeof import('./src/composables/config')['undoList']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
@@ -655,6 +665,9 @@ declare module '@vue/runtime-core' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly canRedo: UnwrapRef<typeof import('./src/composables/config')['canRedo']>
+    readonly canUndo: UnwrapRef<typeof import('./src/composables/config')['canUndo']>
+    readonly canvas: UnwrapRef<typeof import('./src/composables/config')['canvas']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
@@ -750,6 +763,7 @@ declare module '@vue/runtime-core' {
     readonly reactiveOmit: UnwrapRef<typeof import('@vueuse/core')['reactiveOmit']>
     readonly reactivePick: UnwrapRef<typeof import('@vueuse/core')['reactivePick']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
+    readonly redoList: UnwrapRef<typeof import('./src/composables/config')['redoList']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly refAutoReset: UnwrapRef<typeof import('@vueuse/core')['refAutoReset']>
     readonly refDebounced: UnwrapRef<typeof import('@vueuse/core')['refDebounced']>
@@ -784,6 +798,7 @@ declare module '@vue/runtime-core' {
     readonly tryOnMounted: UnwrapRef<typeof import('@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('@vueuse/core')['tryOnUnmounted']>
+    readonly undoList: UnwrapRef<typeof import('./src/composables/config')['undoList']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>

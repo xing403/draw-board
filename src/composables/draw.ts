@@ -1,4 +1,3 @@
-import rough from 'roughjs'
 import type { Drawable } from 'roughjs/bin/core'
 import type { Point } from 'roughjs/bin/geometry'
 import type { ElementGraph, ElementType } from 'shims'
@@ -13,13 +12,12 @@ export function clearAllSelect() {
 /** 画板绘制
  * @returns
  */
-export function handleDrawCanvas(canvas: HTMLCanvasElement) {
-  rc.value = rough.canvas(canvas)
-  if (rc.value === undefined)
+export function handleDrawCanvas() {
+  if (canvas.value === undefined || rc.value === undefined)
     return
 
-  const context = canvas.getContext('2d') as CanvasRenderingContext2D
-  context.clearRect(0, 0, canvas.width, canvas.height)
+  const context = canvas.value.getContext('2d') as CanvasRenderingContext2D
+  context.clearRect(0, 0, canvas.value.width, canvas.value.height)
 
   if (currentElement.value !== undefined)
     processingShape(currentElement.value)
@@ -144,23 +142,20 @@ export function processingShape(element: ElementGraph) {
 /**
  * 删除元素
  */
-export function handleDeleteElements(canvas: HTMLCanvasElement) {
+export function handleDeleteElements() {
   for (let i = 0; i < elements.value.length; i++) {
     if (elements.value[i].select)
       elements.value.splice(i, 1)
   }
-  handleDrawCanvas(canvas)
+  handleDrawCanvas()
   rightClickBoxPos.value.display = 'none'
 }
-export function initDrawBoard(canvas: HTMLCanvasElement) {
+export function initDrawBoard() {
   history.value.forEach((element: ElementGraph) => {
     processingShape(element)
     if (element != null)
       elements.value.push(element)
   })
   clearAllSelect()
-  handleDrawCanvas(canvas)
+  handleDrawCanvas()
 }
-watch(elements.value, (value) => {
-  history.value = value
-})

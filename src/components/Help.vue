@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const props = defineProps<{
-  canvas: HTMLCanvasElement
-}>()
 const helpDialog = ref(false)
 const { Delete, Shift_D } = useMagicKeys()
 const shortcutKey = [{
@@ -11,11 +8,11 @@ const shortcutKey = [{
 
 watch(Shift_D, (v) => {
   if (v)
-    handleDeleteElements(props.canvas)
+    handleDeleteElements()
 })
 watch(Delete, (v) => {
   if (v)
-    handleDeleteElements(props.canvas)
+    handleDeleteElements()
 })
 </script>
 

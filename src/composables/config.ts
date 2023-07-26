@@ -1,7 +1,8 @@
 import rough from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas'
-import type { ElementGraph, ElementType } from 'shims'
+import type { ElementGraph, ElementType, OperationType } from 'shims'
 
+export const canvas = ref<HTMLCanvasElement>()
 export const currentElement = ref<ElementGraph>()
 export const history = useLocalStorage<ElementGraph[]>('draw-elements', [], { mergeDefaults: true })
 export const elements = ref<ElementGraph[]>([])
@@ -25,4 +26,15 @@ export const rightClickBoxPos = ref({
 })
 export const config = ref({
   canMove: false,
+})
+export const undoList = ref<OperationType[]>([])
+export const redoList = ref<OperationType[]>([])
+export const canUndo = computed(() => {
+  return undoList.value.length > 1
+})
+export const canRedo = computed(() => {
+  return redoList.value.length !== 0
+})
+watch(elements.value, (value) => {
+  history.value = value
 })
