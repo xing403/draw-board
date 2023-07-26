@@ -1,6 +1,6 @@
 import rough from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas'
-import type { ElementGraph, ElementType, OperationType } from 'shims'
+import type { ElementGraph, ElementType, OperationType, SettingType } from 'shims'
 
 export const canvas = ref<HTMLCanvasElement>()
 export const currentElement = ref<ElementGraph>()
@@ -38,3 +38,7 @@ export const canRedo = computed(() => {
 watch(elements.value, (value) => {
   history.value = value
 })
+
+export const setting = useLocalStorage<SettingType>('setting', {
+  topBarDirection: 'top',
+}, { mergeDefaults: true })

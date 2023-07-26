@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     RightClick: typeof import('./src/components/RightClick.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Setting: typeof import('./src/components/Setting.vue')['default']
     ToolBar: typeof import('./src/components/ToolBar.vue')['default']
   }
 }

@@ -16,9 +16,12 @@ interface ElementGraph {
   select: boolean
   points?: Point[]
   area: {
-    p1:Point
-    p2:Point
+    p1: Point
+    p2: Point
   }
   draw: (rc: any, context: any) => void
 }
 type OperationType = ElementGraph[]
+interface SettingType {
+  topBarDirection: 'top' | 'left' | 'right' | 'bottom'
+}

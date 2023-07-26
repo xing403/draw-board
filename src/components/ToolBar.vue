@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import type { ElementGraph, OperationType } from 'shims'
+import type { ElementGraph, ElementType, OperationType } from 'shims'
 
-const toolBar = ref()
 const option = ref()
-const { style } = useDraggable(toolBar, {
-  initialValue: { x: window.innerWidth / 2, y: 20 },
-})
 function handleReUndo(value: string[]) {
   if (value.length === 0)
     return
@@ -30,48 +26,105 @@ function handleReUndo(value: string[]) {
     option.value = []
   }, 100)
 }
+const toolBar = ref<{
+  icon: string
+  type: ElementType
+}[]>([{
+  icon: 'i-mdi-cursor-move',
+  type: 'move',
+}, {
+  icon: 'i-mdi-select-drag',
+  type: 'selection',
+}, {
+  icon: 'i-mdi-rectangle-outline',
+  type: 'rectangle',
+}, {
+  icon: 'i-mdi-ellipse-outline',
+  type: 'ellipse',
+}, {
+  icon: 'i-mdi-vector-line',
+  type: 'line',
+}, {
+  icon: 'i-mdi-arrow-top-right',
+  type: 'arrow',
+}, {
+  icon: 'i-mdi-pencil',
+  type: 'freeDraw',
+}])
 </script>
 
 <template>
   <div
-    ref="toolBar" :style="style" b="1px solid gray-400" cursor="pointer" fixed select-none b-rd-5px bg-gray-200
-    bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
+    v-if="setting.topBarDirection === 'top'"
+    b="1px solid gray-400" cursor="pointer" fixed
+    left="50%" top-10px
+    transform="translate-x--50%" select-none b-rd-5px
+    bg-gray-200 bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
   >
-    <button
-      i-mdi-cursor-move btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'move' }"
-      @click="changeDrawMode('move')"
-    />
-    <el-divider direction="vertical" />
-
-    <button
-      i-mdi-select-drag btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'selection' }"
-      @click="changeDrawMode('selection')"
-    />
-    <el-divider direction="vertical" />
-    <button
-      i-mdi-rectangle-outline btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'rectangle' }"
-      @click="changeDrawMode('rectangle')"
-    />
-    <el-divider direction="vertical" />
-    <button
-      i-mdi-ellipse-outline btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'ellipse' }"
-      @click="changeDrawMode('ellipse')"
-    />
-    <el-divider direction="vertical" />
-    <button
-      i-mdi-vector-line btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'line' }"
-      @click="changeDrawMode('line')"
-    />
-    <el-divider direction="vertical" />
-    <button
-      i-mdi-arrow-top-right btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'arrow' }"
-      @click="changeDrawMode('arrow')"
-    />
-    <el-divider direction="vertical" />
-    <button
-      i-mdi-pencil btn icon-btn b="1px solid gray-400" :class="{ active: elementType === 'freeDraw' }"
-      @click="changeDrawMode('freeDraw')"
-    />
+    <template v-for="item, index in toolBar" :key="index">
+      <el-divider
+        v-if="index"
+        :direction="['top', 'bottom'].includes(setting.topBarDirection) ? 'vertical' : 'horizontal'"
+      />
+      <button
+        btn icon-btn b="1px solid gray-400"
+        :class="[{ active: elementType === item.type }, item.icon]"
+        @click="changeDrawMode(item.type)"
+      />
+    </template>
+  </div>
+  <div
+    v-else-if="setting.topBarDirection === 'bottom'"
+    b="1px solid gray-400" cursor="pointer" fixed
+    left="50%" bottom-10px
+    transform="translate-x--50%" select-none b-rd-5px
+    bg-gray-200 bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
+  >
+    <template v-for="item, index in toolBar" :key="index">
+      <el-divider
+        v-if="index"
+        :direction="['top', 'bottom'].includes(setting.topBarDirection) ? 'vertical' : 'horizontal'"
+      />
+      <button
+        btn icon-btn b="1px solid gray-400"
+        :class="[{ active: elementType === item.type }, item.icon]"
+        @click="changeDrawMode(item.type)"
+      />
+    </template>
+  </div>
+  <div
+    v-if="setting.topBarDirection === 'right'"
+    b="1px solid gray-400" cursor="pointer" fixed right-10px top="50%"
+    transform="translate-y--50%" select-none b-rd-5px
+    bg-gray-200 bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
+  >
+    <template v-for="item, index in toolBar" :key="index">
+      <el-divider
+        v-if="index"
+        :direction="['top', 'bottom'].includes(setting.topBarDirection) ? 'vertical' : 'horizontal'"
+      />
+      <button
+        btn icon-btn b="1px solid gray-400"
+        :class="[{ active: elementType === item.type }, item.icon]"
+        @click="changeDrawMode(item.type)"
+      />
+    </template>
+  </div>
+  <div
+    v-if="setting.topBarDirection === 'left'"
+    b="1px solid gray-400" cursor="pointer" top="50%" transform="translate-y--50%" fixed left-10px select-none b-rd-5px bg-gray-200 bg-white p-10px dark:bg-gray-5 shadow="~ hover:lg"
+  >
+    <template v-for="item, index in toolBar" :key="index">
+      <el-divider
+        v-if="index"
+        :direction="['top', 'bottom'].includes(setting.topBarDirection) ? 'vertical' : 'horizontal'"
+      />
+      <button
+        btn icon-btn b="1px solid gray-400"
+        :class="[{ active: elementType === item.type }, item.icon]"
+        @click="changeDrawMode(item.type)"
+      />
+    </template>
   </div>
   <div fixed bottom-20px left-30px>
     <el-checkbox-group v-model="option" size="small" @change="handleReUndo">
@@ -84,3 +137,7 @@ function handleReUndo(value: string[]) {
     </el-checkbox-group>
   </div>
 </template>
+
+<style>
+
+</style>
