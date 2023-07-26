@@ -7,11 +7,11 @@ function handleReUndo(value: string[]) {
     return
   let list: OperationType
   if (value[0] === 'undo' && canUndo.value) {
-    redoList.value.push([...undoList.value.pop() as OperationType])
-    list = [...undoList.value[undoList.value.length - 1]]
+    redoList.value.push(cloneCopy(undoList.value.pop()))
+    list = cloneCopy(undoList.value[undoList.value.length - 1])
   }
   else if (value[0] === 'redo' && canRedo.value) {
-    list = [...redoList.value.pop() as OperationType]
+    list = cloneCopy(redoList.value.pop())
     undoList.value.push(list)
   }
   else {
@@ -21,7 +21,7 @@ function handleReUndo(value: string[]) {
   list.forEach((element: ElementGraph) => {
     elements.value.push(element)
   })
-  handleDrawCanvas()
+  initDrawBoard(list)
   setTimeout(() => {
     option.value = []
   }, 100)

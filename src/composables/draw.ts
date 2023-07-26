@@ -143,19 +143,30 @@ export function processingShape(element: ElementGraph) {
  * 删除元素
  */
 export function handleDeleteElements() {
-  for (let i = 0; i < elements.value.length; i++) {
-    if (elements.value[i].select)
+  const old_elements = cloneCopy(elements.value)
+  for (let i = elements.value.length - 1; i >= 0; i--) {
+    if (old_elements[i].select)
       elements.value.splice(i, 1)
   }
   handleDrawCanvas()
+  undoList.value.push(cloneCopy(elements.value))
   rightClickBoxPos.value.display = 'none'
 }
-export function initDrawBoard() {
-  history.value.forEach((element: ElementGraph) => {
-    processingShape(element)
-    if (element != null)
-      elements.value.push(element)
-  })
+export function initDrawBoard(list?: ElementGraph[]) {
+  if (!list) {
+    history.value.forEach((element: ElementGraph) => {
+      processingShape(element)
+      if (element != null)
+        elements.value.push(element)
+    })
+  }
+  else {
+    list.forEach((element: ElementGraph) => {
+      processingShape(element)
+      if (element != null)
+        elements.value.push(element)
+    })
+  }
   clearAllSelect()
   handleDrawCanvas()
 }

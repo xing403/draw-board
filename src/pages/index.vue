@@ -77,7 +77,8 @@ function handleMouseUp() {
   if (elementType.value === 'selection')
     elements.value.pop()
   else
-    undoList.value.push([...elements.value])
+    undoList.value.push(cloneCopy(elements.value))
+
   if (elementType.value === 'drag')
     elementType.value = 'selection'
   currentElement.value = undefined
@@ -94,7 +95,7 @@ onMounted(() => {
   canvas.value = canvasRef.value as HTMLCanvasElement
   rc.value = new RoughCanvas(canvas.value)
   initDrawBoard()
-  undoList.value.push([...elements.value])
+  undoList.value.push(cloneCopy(elements.value))
 })
 function handleTouchDown(e: TouchEvent) {
   if (e.touches.length === 1) {

@@ -16,6 +16,7 @@ declare global {
   const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
   const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
   const clearAllSelect: typeof import('./src/composables/draw')['clearAllSelect']
+  const cloneCopy: typeof import('./src/utils/index')['cloneCopy']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -348,6 +349,7 @@ declare module 'vue' {
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
+    readonly cloneCopy: UnwrapRef<typeof import('./src/utils/index')['cloneCopy']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -674,6 +676,7 @@ declare module '@vue/runtime-core' {
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
+    readonly cloneCopy: UnwrapRef<typeof import('./src/utils/index')['cloneCopy']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>

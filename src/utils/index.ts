@@ -1,5 +1,6 @@
 import type { Point } from 'roughjs/bin/geometry'
 import type { ElementGraph } from 'shims'
+import cloneDeep from 'clone-deep'
 
 /**
  * 判断点在 box 内部
@@ -69,4 +70,7 @@ export function moveElement(element: ElementGraph) {
   element.area.p1[1] += distanceY
   element.area.p2[0] += distanceX
   element.area.p2[1] += distanceY
+}
+export function cloneCopy<T>(obj: T) {
+  return cloneDeep(obj)
 }
