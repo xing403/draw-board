@@ -12,8 +12,7 @@ function handleMouseDown() {
   const [selectLen, selects] = hasSelected()
   lastX.value = x.value
   lastY.value = y.value
-  if (selectLen) {
-    // 点击的位置在某个选中元素内部执行拖拽
+  if (selectLen) { // 点击的位置在某个选中元素内部执行拖拽
     elementType.value = selects.some((element) => {
       return checkPointInBox(element, [x.value, y.value])
     })

@@ -1,6 +1,6 @@
 import type { Drawable } from 'roughjs/bin/core'
 import type { Point } from 'roughjs/bin/geometry'
-import type { ElementGraph, ElementType } from 'shims'
+import type { ElementGraph, ElementType, PositionType } from 'shims'
 
 /** 清除所有选择的元素
  */
@@ -26,16 +26,16 @@ export function handleDrawCanvas() {
     element.draw(rc.value, context)
     if (element.select) {
       const [x1, y1, x2, y2] = FormatGraphPoint(element)
-      const margin = 8
+      const margin = setting.value.styleType.selectMargin
       const r = 5
       context.strokeStyle = '#1c86d1'
       context.fillStyle = '#FFFFFF'
       context.strokeRect(x1 - margin, y1 - margin, x2 - x1 + 2 * margin, y2 - y1 + 2 * margin)
       context.closePath()
-      const arr = ['left-top', 'top', 'right-top', 'left', 'right', 'left-bottom', 'bottom', 'right-bottom']
+      const arr: PositionType[] = ['left-top', 'top', 'right-top', 'left', 'right', 'left-bottom', 'bottom', 'right-bottom']
       arr.forEach((item: any) => {
-        let x = 0
-        let y = 0
+        let x = x1
+        let y = y1
         switch (item) {
           case 'left-top':
             x = x1 - margin

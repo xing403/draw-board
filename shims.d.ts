@@ -24,4 +24,8 @@ interface ElementGraph {
 type OperationType = ElementGraph[]
 interface SettingType {
   topBarDirection: 'top' | 'left' | 'right' | 'bottom'
+  styleType:{
+    selectMargin: number
+  }
 }
+type PositionType = 'in' | 'out' | 'left-top' | 'top'| 'right-top' | 'left' | 'right' | 'left-bottom' | 'bottom' | 'right-bottom'

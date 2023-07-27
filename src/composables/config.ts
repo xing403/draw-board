@@ -41,4 +41,7 @@ watch(elements.value, (value) => {
 
 export const setting = useLocalStorage<SettingType>('setting', {
   topBarDirection: 'top',
+  styleType: {
+    selectMargin: 8,
+  },
 }, { mergeDefaults: true })

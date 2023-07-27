@@ -15,6 +15,7 @@ declare global {
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
   const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
   const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
+  const checkPointInBoxPos: typeof import('./src/utils/index')['checkPointInBoxPos']
   const clearAllSelect: typeof import('./src/composables/draw')['clearAllSelect']
   const cloneCopy: typeof import('./src/utils/index')['cloneCopy']
   const computed: typeof import('vue')['computed']
@@ -348,6 +349,7 @@ declare module 'vue' {
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
+    readonly checkPointInBoxPos: UnwrapRef<typeof import('./src/utils/index')['checkPointInBoxPos']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly cloneCopy: UnwrapRef<typeof import('./src/utils/index')['cloneCopy']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -675,6 +677,7 @@ declare module '@vue/runtime-core' {
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
+    readonly checkPointInBoxPos: UnwrapRef<typeof import('./src/utils/index')['checkPointInBoxPos']>
     readonly clearAllSelect: UnwrapRef<typeof import('./src/composables/draw')['clearAllSelect']>
     readonly cloneCopy: UnwrapRef<typeof import('./src/utils/index')['cloneCopy']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
