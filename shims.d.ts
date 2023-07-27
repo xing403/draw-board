@@ -6,7 +6,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection' | 'line' | 'arrow' | 'move' | 'freeDraw'
+type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection' | 'line' | 'arrow' | 'move' | 'freeDraw'| 'change'
 interface ElementGraph {
   type: ElementType
   x: number
@@ -15,6 +15,7 @@ interface ElementGraph {
   height: number
   select: boolean
   points?: Point[]
+  id: string
   area: {
     p1: Point
     p2: Point
@@ -25,7 +26,8 @@ type OperationType = ElementGraph[]
 interface SettingType {
   topBarDirection: 'top' | 'left' | 'right' | 'bottom'
   styleType:{
-    selectMargin: number
+    selectMargin: number,
+    cursorStyle: string
   }
 }
 type PositionType = 'in' | 'out' | 'left-top' | 'top'| 'right-top' | 'left' | 'right' | 'left-bottom' | 'bottom' | 'right-bottom'

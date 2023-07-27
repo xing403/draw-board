@@ -23,6 +23,8 @@ export function handleDrawCanvas() {
     processingShape(currentElement.value)
 
   elements.value.forEach((element: ElementGraph) => {
+    if (element.isDelete)
+      return
     element.draw(rc.value, context)
     if (element.select) {
       const [x1, y1, x2, y2] = FormatGraphPoint(element)
@@ -82,12 +84,11 @@ export function handleDrawCanvas() {
  * @param type 元素类型
  * @param x 元素x轴坐标
  * @param y 元素y轴坐标
- * @param width 元素宽度
- * @param height 元素高度
  * @returns
  */
 export function initializeGraph(type: ElementType, x: number, y: number) {
   const element: ElementGraph = {
+    id: getUUID(),
     type,
     x,
     y,
@@ -206,4 +207,64 @@ export function initDrawBoard(list?: ElementGraph[]) {
   }
   clearAllSelect()
   handleDrawCanvas()
+}
+/** 改变元素的大小
+ * @param element
+ * @param pos
+ */
+export function changeSize() {
+  if (!currentElement.value)
+    return
+  if (`${Pos.value}`.includes('-')) {
+    horizontalDirection(`${Pos.value}`.split('-')[0] as PositionType)
+    verticalDirection(`${Pos.value}`.split('-')[1] as PositionType)
+  }
+  else {
+    if (['top', 'bottom'].includes(Pos.value))
+      verticalDirection(Pos.value)
+    else
+      horizontalDirection(Pos.value)
+  }
+}
+/** 水平方向改变
+ * @param pos
+ * @returns
+ */
+function horizontalDirection(pos: PositionType) {
+  if (!currentElement.value)
+    return
+  if (pos === 'left' && currentElement.value.width < 0)
+    pos = 'right'
+  else if (pos === 'right' && currentElement.value.width < 0)
+    pos = 'left'
+  switch (pos) {
+    case 'left':
+      currentElement.value.x = currentElement.value.x + x.value - lastX.value
+      currentElement.value.width = currentElement.value.width - x.value + lastX.value
+      break
+    case 'right':
+      currentElement.value.width = currentElement.value.width + x.value - lastX.value
+      break
+  }
+}
+/** 垂直方向改变
+ * @param pos
+ * @returns
+ */
+function verticalDirection(pos: PositionType) {
+  if (!currentElement.value)
+    return
+  if (pos === 'left' && currentElement.value.width < 0)
+    pos = 'right'
+  else if (pos === 'right' && currentElement.value.width < 0)
+    pos = 'left'
+  switch (pos) {
+    case 'top':
+      currentElement.value.y = currentElement.value.y + y.value - lastY.value
+      currentElement.value.height = currentElement.value.height - y.value + lastY.value
+      break
+    case 'bottom':
+      currentElement.value.height = currentElement.value.height + y.value - lastY.value
+      break
+  }
 }

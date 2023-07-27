@@ -1,6 +1,6 @@
 import rough from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas'
-import type { ElementGraph, ElementType, OperationType, SettingType } from 'shims'
+import type { ElementGraph, ElementType, OperationType, PositionType, SettingType } from 'shims'
 
 export const canvas = ref<HTMLCanvasElement>()
 export const currentElement = ref<ElementGraph>()
@@ -11,6 +11,7 @@ export const { x, y } = useMouse()
 export const { width, height } = useWindowSize()
 export const lastX = ref(0)
 export const lastY = ref(0)
+export const Pos = ref<PositionType>('out')
 export const generator = rough.generator()
 
 export const isDark = useDark()
@@ -26,6 +27,7 @@ export const rightClickBoxPos = ref({
 })
 export const config = ref({
   canMove: false,
+  isOperation: false,
 })
 export const undoList = ref<OperationType[]>([])
 export const redoList = ref<OperationType[]>([])
@@ -43,5 +45,6 @@ export const setting = useLocalStorage<SettingType>('setting', {
   topBarDirection: 'top',
   styleType: {
     selectMargin: 8,
+    cursorStyle: 'crosshair',
   },
 }, { mergeDefaults: true })

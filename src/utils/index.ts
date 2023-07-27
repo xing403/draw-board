@@ -103,3 +103,28 @@ export function moveElement(element: ElementGraph) {
 export function cloneCopy<T>(obj: T) {
   return cloneDeep(obj)
 }
+export function changePointStyle(config?: { style?: string; pos?: PositionType }) {
+  if (!canvas.value)
+    return
+  if (config?.pos) {
+    if (config.pos === 'left-bottom' || config.pos === 'right-top')
+      canvas.value.style.cursor = 'nesw-resize'
+    else if (config.pos === 'left-top' || config.pos === 'right-bottom')
+      canvas.value.style.cursor = 'nwse-resize'
+    else if (config.pos === 'top' || config.pos === 'bottom')
+      canvas.value.style.cursor = 'ns-resize'
+    else if (config.pos === 'left' || config.pos === 'right')
+      canvas.value.style.cursor = 'ew-resize'
+    else
+      canvas.value.style.cursor = 'crosshair'
+  }
+  else if (config?.style) {
+    canvas.value.style.cursor = config.style || 'crosshair'
+  }
+  else {
+    canvas.value.style.cursor = 'crosshair'
+  }
+}
+export function getUUID() {
+  return `${new Date().getTime()}`
+}

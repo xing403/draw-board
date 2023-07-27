@@ -6,6 +6,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const FormatGraphPoint: typeof import('./src/utils/index')['FormatGraphPoint']
+  const Pos: typeof import('./src/composables/config')['Pos']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
@@ -13,6 +14,8 @@ declare global {
   const canUndo: typeof import('./src/composables/config')['canUndo']
   const canvas: typeof import('./src/composables/config')['canvas']
   const changeDrawMode: typeof import('./src/composables/config')['changeDrawMode']
+  const changePointStyle: typeof import('./src/utils/index')['changePointStyle']
+  const changeSize: typeof import('./src/composables/draw')['changeSize']
   const checkBoxInBox: typeof import('./src/utils/index')['checkBoxInBox']
   const checkPointInBox: typeof import('./src/utils/index')['checkPointInBox']
   const checkPointInBoxPos: typeof import('./src/utils/index')['checkPointInBoxPos']
@@ -52,6 +55,7 @@ declare global {
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getUUID: typeof import('./src/utils/index')['getUUID']
   const h: typeof import('vue')['h']
   const handleDeleteElements: typeof import('./src/composables/draw')['handleDeleteElements']
   const handleDrawCanvas: typeof import('./src/composables/draw')['handleDrawCanvas']
@@ -340,6 +344,7 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly FormatGraphPoint: UnwrapRef<typeof import('./src/utils/index')['FormatGraphPoint']>
+    readonly Pos: UnwrapRef<typeof import('./src/composables/config')['Pos']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -347,6 +352,8 @@ declare module 'vue' {
     readonly canUndo: UnwrapRef<typeof import('./src/composables/config')['canUndo']>
     readonly canvas: UnwrapRef<typeof import('./src/composables/config')['canvas']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
+    readonly changePointStyle: UnwrapRef<typeof import('./src/utils/index')['changePointStyle']>
+    readonly changeSize: UnwrapRef<typeof import('./src/composables/draw')['changeSize']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly checkPointInBoxPos: UnwrapRef<typeof import('./src/utils/index')['checkPointInBoxPos']>
@@ -386,6 +393,7 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getUUID: UnwrapRef<typeof import('./src/utils/index')['getUUID']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleDeleteElements: UnwrapRef<typeof import('./src/composables/draw')['handleDeleteElements']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
@@ -668,6 +676,7 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly FormatGraphPoint: UnwrapRef<typeof import('./src/utils/index')['FormatGraphPoint']>
+    readonly Pos: UnwrapRef<typeof import('./src/composables/config')['Pos']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -675,6 +684,8 @@ declare module '@vue/runtime-core' {
     readonly canUndo: UnwrapRef<typeof import('./src/composables/config')['canUndo']>
     readonly canvas: UnwrapRef<typeof import('./src/composables/config')['canvas']>
     readonly changeDrawMode: UnwrapRef<typeof import('./src/composables/config')['changeDrawMode']>
+    readonly changePointStyle: UnwrapRef<typeof import('./src/utils/index')['changePointStyle']>
+    readonly changeSize: UnwrapRef<typeof import('./src/composables/draw')['changeSize']>
     readonly checkBoxInBox: UnwrapRef<typeof import('./src/utils/index')['checkBoxInBox']>
     readonly checkPointInBox: UnwrapRef<typeof import('./src/utils/index')['checkPointInBox']>
     readonly checkPointInBoxPos: UnwrapRef<typeof import('./src/utils/index')['checkPointInBoxPos']>
@@ -714,6 +725,7 @@ declare module '@vue/runtime-core' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getUUID: UnwrapRef<typeof import('./src/utils/index')['getUUID']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleDeleteElements: UnwrapRef<typeof import('./src/composables/draw')['handleDeleteElements']>
     readonly handleDrawCanvas: UnwrapRef<typeof import('./src/composables/draw')['handleDrawCanvas']>
