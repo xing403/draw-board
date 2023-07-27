@@ -233,10 +233,6 @@ export function changeSize() {
 function horizontalDirection(pos: PositionType) {
   if (!currentElement.value)
     return
-  if (pos === 'left' && currentElement.value.width < 0)
-    pos = 'right'
-  else if (pos === 'right' && currentElement.value.width < 0)
-    pos = 'left'
   switch (pos) {
     case 'left':
       currentElement.value.x = currentElement.value.x + x.value - lastX.value
@@ -254,10 +250,6 @@ function horizontalDirection(pos: PositionType) {
 function verticalDirection(pos: PositionType) {
   if (!currentElement.value)
     return
-  if (pos === 'left' && currentElement.value.width < 0)
-    pos = 'right'
-  else if (pos === 'right' && currentElement.value.width < 0)
-    pos = 'left'
   switch (pos) {
     case 'top':
       currentElement.value.y = currentElement.value.y + y.value - lastY.value

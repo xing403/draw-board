@@ -96,9 +96,10 @@ async function handleMouseUp() {
   if (currentElement.value && elementType.value !== 'freeDraw') {
     const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
     if (currentElement.value.width < 0 || currentElement.value.height < 0) {
-      currentElement.value = initializeGraph(elementType.value, x1, y1) as ElementGraph
+      currentElement.value = initializeGraph(currentElement.value.type, x1, y1) as ElementGraph
       currentElement.value.width = x2 - x1
       currentElement.value.height = y2 - y1
+      currentElement.value.select = true
       processingShape(currentElement.value)
       if (currentElement.value) {
         elements.value.pop()
