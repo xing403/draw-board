@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/clone-deep':
+    specifier: ^4.0.1
+    version: registry.npmmirror.com/@types/clone-deep@4.0.1
   '@vueuse/core':
     specifier: ^10.1.2
     version: registry.npmmirror.com/@vueuse/core@10.1.2(vue@3.3.4)
@@ -20,6 +23,9 @@ dependencies:
   roughjs:
     specifier: ^4.5.2
     version: registry.npmmirror.com/roughjs@4.5.2
+  save-dev:
+    specifier: 0.0.1-security
+    version: registry.npmmirror.com/save-dev@0.0.1-security
   vue:
     specifier: ^3.3.4
     version: registry.npmmirror.com/vue@3.3.4
@@ -1004,6 +1010,12 @@ packages:
     name: '@types/chai'
     version: 4.3.5
     dev: true
+
+  registry.npmmirror.com/@types/clone-deep@4.0.1:
+    resolution: {integrity: sha512-bdkCSkyVHsgl3Goe1y16T9k6JuQx7SiDREkq728QjKmTZkGJZuS8R3gGcnGzVuGBP0mssKrzM/GlMOQxtip9cg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/clone-deep/-/clone-deep-4.0.1.tgz}
+    name: '@types/clone-deep'
+    version: 4.0.1
+    dev: false
 
   registry.npmmirror.com/@types/debug@4.1.8:
     resolution: {integrity: sha512-/vPO1EPOs306Cvhwv7KfVfYvOJqA/S/AXjaHQiJboCZzcNDb+TIJFN9/2C9DZ//ijSKWioNyUxD792QmDJ+HKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/debug/-/debug-4.1.8.tgz}
@@ -6776,6 +6788,12 @@ packages:
     name: safer-buffer
     version: 2.1.2
     dev: true
+
+  registry.npmmirror.com/save-dev@0.0.1-security:
+    resolution: {integrity: sha512-k6knZTDNK8PKKbIqnvxiOveJinuw2LcQjqDoaorZWP9M5AR2EPsnpDeSbeoZZ0pHr5ze1uoaKdK8NBGQrJ34Uw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/save-dev/-/save-dev-0.0.1-security.tgz}
+    name: save-dev
+    version: 0.0.1-security
+    dev: false
 
   registry.npmmirror.com/saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/saxes/-/saxes-6.0.0.tgz}
