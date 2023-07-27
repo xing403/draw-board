@@ -25,19 +25,56 @@ export function handleDrawCanvas() {
   elements.value.forEach((element: ElementGraph) => {
     element.draw(rc.value, context)
     if (element.select) {
-      const margin = 4
-      context.setLineDash([8, 4])
-      const [x, y] = element.area.p1
-      const width = element.area.p2[0] - x
-      const height = element.area.p2[1] - y
-
-      context.strokeRect(
-        x - margin,
-        y - margin,
-        width + margin * 2,
-        height + margin * 2,
-      )
-      context.setLineDash([])
+      const [x1, y1, x2, y2] = FormatGraphPoint(element)
+      const margin = 8
+      const r = 5
+      context.strokeStyle = '#1c86d1'
+      context.fillStyle = '#FFFFFF'
+      context.strokeRect(x1 - margin, y1 - margin, x2 - x1 + 2 * margin, y2 - y1 + 2 * margin)
+      context.closePath()
+      const arr = ['left-top', 'top', 'right-top', 'left', 'right', 'left-bottom', 'bottom', 'right-bottom']
+      arr.forEach((item: any) => {
+        let x = 0
+        let y = 0
+        switch (item) {
+          case 'left-top':
+            x = x1 - margin
+            y = y1 - margin
+            break
+          case 'top':
+            x = (x1 + x2) / 2
+            y = y1 - margin
+            break
+          case 'right-top':
+            x = x2 + margin
+            y = y1 - margin
+            break
+          case 'left':
+            x = x1 - margin
+            y = (y1 + y2) / 2
+            break
+          case 'right':
+            x = x2 + margin
+            y = (y1 + y2) / 2
+            break
+          case 'left-bottom':
+            x = x1 - margin
+            y = y2 + margin
+            break
+          case 'bottom':
+            x = (x1 + x2) / 2
+            y = y2 + margin
+            break
+          case 'right-bottom':
+            x = x2 + margin
+            y = y2 + margin
+            break
+        }
+        context.beginPath()
+        context.arc(x, y, r, 0, 2 * Math.PI)
+        context.stroke()
+        context.fill()
+      })
     }
   })
 }
