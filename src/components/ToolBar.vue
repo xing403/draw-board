@@ -18,10 +18,11 @@ function handleReUndo(value: string[]) {
     return
   }
   elements.value.splice(0, elements.value.length)
+
   list.forEach((element: ElementGraph) => {
-    elements.value.push(element)
+    elements.value.push(cloneCopy(element))
   })
-  initDrawBoard(list)
+  handleDrawCanvas()
   setTimeout(() => {
     option.value = []
   }, 100)
