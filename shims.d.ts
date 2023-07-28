@@ -6,7 +6,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection' | 'line' | 'arrow' | 'move' | 'freeDraw'| 'change'
+type ElementType = 'rectangle' | 'ellipse' | 'drag' | 'selection' | 'line' | 'arrow' | 'move' | 'freeDraw'| 'change'| 'eraser'
 interface ElementGraph {
   type: ElementType
   x: number

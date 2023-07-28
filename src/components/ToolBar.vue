@@ -22,6 +22,7 @@ function handleReUndo(value: string[]) {
   list.forEach((element: ElementGraph) => {
     elements.value.push(cloneCopy(element))
   })
+  clearAllSelect()
   handleDrawCanvas()
   setTimeout(() => {
     option.value = []
@@ -51,6 +52,9 @@ const toolBar = ref<{
 }, {
   icon: 'i-mdi-pencil',
   type: 'freeDraw',
+}, {
+  icon: 'i-mdi-eraser',
+  type: 'eraser',
 }])
 </script>
 

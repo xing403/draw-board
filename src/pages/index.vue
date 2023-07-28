@@ -25,7 +25,7 @@ function handleMouseDown() {
       }
     }
   }
-  if (elementType.value !== 'drag' && elementType.value !== 'move' && elementType.value !== 'change') {
+  if (!['drag', 'move', 'change', 'eraser'].includes(elementType.value)) {
     clearAllSelect()
     currentElement.value = initializeGraph(elementType.value, x.value, y.value)
     elements.value.push(currentElement.value)
@@ -52,9 +52,13 @@ function handleMouseMove() {
         moveElement(element)
       })
     }
-    else {
-      if (currentElement.value == null)
-        return
+    else if (elementType.value === 'eraser') {
+      elements.value.forEach((element) => {
+        if (checkPointInBox(element, [x.value, y.value]))
+          element.select = true
+      })
+    }
+    else if (currentElement.value != null) {
       if (elementType.value === 'selection') {
         elements.value.forEach((element) => {
           element.select = checkBoxInBox(element, currentElement.value as ElementGraph)
@@ -114,6 +118,8 @@ async function handleMouseUp() {
     undoList.value.push(cloneCopy(elements.value))
   if (elementType.value === 'drag')
     elementType.value = 'selection'
+  else if (elementType.value === 'eraser')
+    handleDeleteElements()
   currentElement.value = undefined
   handleDrawCanvas()
   redoList.value.splice(0, redoList.value.length)
