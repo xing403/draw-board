@@ -27,6 +27,7 @@ interface SettingType {
   topBarDirection: 'top' | 'left' | 'right' | 'bottom'
   styleType:{
     selectMargin: number,
+    selectStrokeColor: string,
     cursorStyle: string
   }
 }

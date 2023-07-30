@@ -78,11 +78,10 @@ function handleMouseMove() {
           else if (Math.sqrt((x.value - currentElement.value.x) ** 2 + (y.value - currentElement.value.y) ** 2) <= 2 * setting.value.styleType.selectMargin) {
             const end_x = currentElement.value.x + currentElement.value.width
             const end_y = currentElement.value.y + currentElement.value.height
-            const [start_x, start_y] = rotate(x.value, y.value, end_x, end_y, (-1 * Math.PI) / 180)
-            currentElement.value.x = start_x
-            currentElement.value.y = start_y
-            currentElement.value.width = end_x - start_x
-            currentElement.value.height = end_y - start_y
+            currentElement.value.x = x.value
+            currentElement.value.y = y.value
+            currentElement.value.width = end_x - currentElement.value.x
+            currentElement.value.height = end_y - currentElement.value.y
           }
         }
         else { changeSize() }

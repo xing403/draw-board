@@ -30,7 +30,7 @@ export function handleDrawCanvas() {
       const margin = setting.value.styleType.selectMargin
       const r = 5
 
-      context.strokeStyle = '#1c86d1'
+      context.strokeStyle = setting.value.styleType.selectStrokeColor
       context.fillStyle = '#FFFFFF'
 
       if (['line', 'arrow'].includes(element.type)) {

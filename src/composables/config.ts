@@ -45,6 +45,7 @@ export const setting = useLocalStorage<SettingType>('setting', {
   topBarDirection: 'top',
   styleType: {
     selectMargin: 8,
+    selectStrokeColor: '#1c86d1',
     cursorStyle: 'crosshair',
   },
 }, { mergeDefaults: true })
