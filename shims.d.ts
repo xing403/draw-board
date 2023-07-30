@@ -14,13 +14,13 @@ interface ElementGraph {
   width: number
   height: number
   select: boolean
-  points?: Point[]
+  points: Point[],
   id: string
   area: {
     p1: Point
     p2: Point
   }
-  draw: (rc: any, context: any) => void
+  draw: (rc: any, context: any) => void,
 }
 type OperationType = ElementGraph[]
 interface SettingType {

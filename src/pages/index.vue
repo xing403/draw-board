@@ -28,6 +28,10 @@ function handleMouseDown() {
   if (!['drag', 'move', 'change', 'eraser'].includes(elementType.value)) {
     clearAllSelect()
     currentElement.value = initializeGraph(elementType.value, x.value, y.value)
+    if (elementType.value !== 'freeDraw') {
+      currentElement.value.points.push([x.value, y.value])
+      currentElement.value.points.push([0, 0])
+    }
     elements.value.push(currentElement.value)
   }
   else if (elementType.value === 'move') {
@@ -65,21 +69,41 @@ function handleMouseMove() {
         })
       }
       if (elementType.value === 'change') {
-        changeSize()
+        if (['line', 'arrow'].includes(currentElement.value.type)) {
+          if (Math.sqrt((x.value - currentElement.value.x - currentElement.value.width) ** 2
+          + (y.value - currentElement.value.y - currentElement.value.height) ** 2) <= 20) {
+            currentElement.value.width = x.value - currentElement.value.x
+            currentElement.value.height = y.value - currentElement.value.y
+          }
+          else if (Math.sqrt((x.value - currentElement.value.x) ** 2 + (y.value - currentElement.value.y) ** 2) <= 2 * setting.value.styleType.selectMargin) {
+            const end_x = currentElement.value.x + currentElement.value.width
+            const end_y = currentElement.value.y + currentElement.value.height
+            const [start_x, start_y] = rotate(x.value, y.value, end_x, end_y, (-1 * Math.PI) / 180)
+            currentElement.value.x = start_x
+            currentElement.value.y = start_y
+            currentElement.value.width = end_x - start_x
+            currentElement.value.height = end_y - start_y
+          }
+        }
+        else { changeSize() }
       }
       else {
-        const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
-        if (elementType.value === 'freeDraw') {
-          currentElement.value?.points?.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
-          currentElement.value.area.p1 = [Math.min(x1, x.value), Math.min(y1, y.value)]
-          currentElement.value.area.p2 = [Math.max(x2, x.value), Math.max(y2, y.value)]
-        }
-        else {
-          currentElement.value.area.p1 = [x1, y1]
-          currentElement.value.area.p2 = [x2, y2]
-        }
         currentElement.value.width = x.value - currentElement.value.x
         currentElement.value.height = y.value - currentElement.value.y
+      }
+
+      const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
+      if (elementType.value === 'freeDraw') {
+        currentElement.value.points.push([x.value - currentElement.value.x, y.value - currentElement.value.y])
+        currentElement.value.area.p1 = [Math.min(x1, x.value), Math.min(y1, y.value)]
+        currentElement.value.area.p2 = [Math.max(x2, x.value), Math.max(y2, y.value)]
+      }
+      else {
+        currentElement.value.area.p1 = [Math.min(currentElement.value.x, currentElement.value.x + currentElement.value.width),
+          Math.min(currentElement.value.y, currentElement.value.y + currentElement.value.height)]
+        currentElement.value.area.p2 = [Math.max(currentElement.value.x, currentElement.value.x + currentElement.value.width),
+          Math.max(currentElement.value.y, currentElement.value.y + currentElement.value.height)]
+        currentElement.value.points[1] = [currentElement.value.width, currentElement.value.height]
       }
     }
     lastX.value = x.value
@@ -97,19 +121,30 @@ function handleMouseMove() {
 async function handleMouseUp() {
   config.value.canMove = false
   config.value.isOperation = false
-  if (currentElement.value && elementType.value !== 'freeDraw') {
-    const [x1, y1, x2, y2] = FormatGraphPoint(currentElement.value)
-    if (currentElement.value.width < 0 || currentElement.value.height < 0) {
-      currentElement.value = initializeGraph(currentElement.value.type, x1, y1) as ElementGraph
+  if (currentElement.value && elementType.value !== 'freeDraw' && (currentElement.value.width < 0 || currentElement.value.height < 0)) {
+    const correction = cloneCopy(currentElement.value) as ElementGraph
+    const [x1, y1, x2, y2] = FormatGraphPoint(correction)
+
+    currentElement.value = initializeGraph(currentElement.value.type, x1, y1) as ElementGraph
+    if (['line', 'arrow'].includes(currentElement.value.type)) {
+      if (correction.height < 0)
+        currentElement.value.y = y2
+      if (correction.width < 0)
+        currentElement.value.x = x2
+      currentElement.value.width = correction.width
+      currentElement.value.height = correction.height
+    }
+    else {
       currentElement.value.width = x2 - x1
       currentElement.value.height = y2 - y1
-      currentElement.value.select = true
-      processingShape(currentElement.value)
-      if (currentElement.value) {
-        elements.value.pop()
-        elements.value.push(currentElement.value)
-      }
     }
+    currentElement.value.area.p1 = correction.area.p1
+    currentElement.value.area.p2 = correction.area.p2
+    currentElement.value.points[1] = correction.points[1]
+    currentElement.value.select = true
+    processingShape(currentElement.value)
+    elements.value.pop()
+    elements.value.push(currentElement.value)
   }
 
   if (elementType.value === 'selection')
@@ -163,17 +198,14 @@ function handleTouchUp() {
       </div>
     </div>
     <canvas
-      ref="canvasRef" :width="width" :height="height"
-      bg-white dark:bg-gray-8
-      @mousedown="handleMouseDown"
-      @mousemove="handleMouseMove"
-      @mouseup="handleMouseUp"
-      @contextmenu="handleRightClick"
-      @touchstart="handleTouchDown"
-      @touchmove="handleTouchMove"
-      @touchend="handleTouchUp"
+      ref="canvasRef" :width="width" :height="height" bg-white dark:bg-gray-8 @mousedown="handleMouseDown"
+      @mousemove="handleMouseMove" @mouseup="handleMouseUp" @contextmenu="handleRightClick" @touchstart="handleTouchDown"
+      @touchmove="handleTouchMove" @touchend="handleTouchUp"
     />
-    <right-click ref="rightClickRef" :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }" />
+    <right-click
+      ref="rightClickRef"
+      :style="{ left: `${rightClickBoxPos.x}px`, top: `${rightClickBoxPos.y}px`, display: rightClickBoxPos.display }"
+    />
   </div>
 </template>
 

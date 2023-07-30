@@ -54,17 +54,8 @@ export function checkPointInBoxPos(element: ElementGraph, point: Point, offset: 
  * @returns
  */
 export function FormatGraphPoint(element: ElementGraph) {
-  let x1, y1, x2, y2
-  if (element.type === 'freeDraw') {
-    [x1, y1] = element.area.p1;
-    [x2, y2] = element.area.p2
-  }
-  else {
-    x1 = Math.min(element.x, element.x + element.width)
-    y1 = Math.min(element.y, element.y + element.height)
-    x2 = Math.max(element.x, element.x + element.width)
-    y2 = Math.max(element.y, element.y + element.height)
-  }
+  const [x1, y1] = element.area.p1
+  const [x2, y2] = element.area.p2
   return [x1, y1, x2, y2]
 }
 /** 是否被选择
