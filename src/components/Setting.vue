@@ -32,7 +32,7 @@ const settingOption = {
         </el-radio-group>
       </el-form-item>
       <el-form-item label="选择框距离元素边距" prop="topBarDirection">
-        <el-input-number v-model="setting.styleType.selectMargin" :min="8" :step="2" step-strictly />
+        <el-input-number v-model="setting.styleType.selectMargin" :min="8" :max="18" :step="2" step-strictly />
       </el-form-item>
     </el-form>
   </el-drawer>
