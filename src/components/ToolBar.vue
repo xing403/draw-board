@@ -7,11 +7,11 @@ function handleReUndo(value: string[]) {
     return
   let list: OperationType
   if (value[0] === 'undo' && canUndo.value) {
-    redoList.value.push(cloneCopy(undoList.value.pop() as ElementGraph[]))
+    redoList.value.push(cloneCopy(undoList.value.pop()))
     list = cloneCopy(undoList.value[undoList.value.length - 1])
   }
   else if (value[0] === 'redo' && canRedo.value) {
-    list = cloneCopy(redoList.value.pop() as ElementGraph[])
+    list = cloneCopy(redoList.value.pop())
     undoList.value.push(list)
   }
   else {
@@ -131,7 +131,7 @@ const toolBar = ref<{
       />
     </template>
   </div>
-  <div fixed bottom-20px left-30px flex="~ row gap-1" justify="start">
+  <div fixed bottom-20px left-30px>
     <el-checkbox-group v-model="option" size="small" @change="handleReUndo">
       <el-checkbox-button key="undo" label="undo" :disabled="!canUndo">
         <div btn-icon i-mdi-undo-variant h-5 w-5 />
@@ -140,7 +140,6 @@ const toolBar = ref<{
         <div btn-icon i-mdi-redo-variant h-5 w-5 />
       </el-checkbox-button>
     </el-checkbox-group>
-    <style-setting />
   </div>
 </template>
 

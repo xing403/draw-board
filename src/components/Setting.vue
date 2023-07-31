@@ -19,7 +19,7 @@ const settingOption = {
 
 <template>
   <button i-mdi-cog-outline h-6 w-6 btn icon-btn @click="settingDialog = true" />
-  <el-drawer v-model="settingDialog" title="设置" direction="rtl" size="500">
+  <el-drawer v-model="settingDialog" title="设置" direction="rtl">
     <el-form :model="setting" label-width="150px" :inline="false">
       <el-form-item label="工具栏位置" prop="topBarDirection">
         <el-radio-group v-model="setting.topBarDirection">
