@@ -1,4 +1,4 @@
-import type { Drawable } from 'roughjs/bin/core'
+import type { Drawable, Options } from 'roughjs/bin/core'
 import type { Point } from 'roughjs/bin/geometry'
 import type { ElementGraph, ElementType, PositionType } from 'shims'
 import { FormatGraphPoint, rotate } from '../utils'
@@ -100,7 +100,7 @@ export function handleDrawCanvas() {
  * @param y 元素y轴坐标
  * @returns
  */
-export function initializeGraph(type: ElementType, x: number, y: number) {
+export function initializeGraph(type: ElementType, x: number, y: number, config: Options) {
   const element: ElementGraph = {
     id: getUUID(),
     type,
@@ -112,6 +112,7 @@ export function initializeGraph(type: ElementType, x: number, y: number) {
     draw: () => { },
     points: [],
     area: { p1: [x, y], p2: [x, y] },
+    config,
   }
   return element
 }
