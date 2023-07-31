@@ -27,7 +27,7 @@ function handleMouseDown() {
   }
   if (!['drag', 'move', 'change', 'eraser'].includes(elementType.value)) {
     clearAllSelect()
-    currentElement.value = initializeGraph(elementType.value, x.value, y.value)
+    currentElement.value = initializeGraph(elementType.value, x.value, y.value, style.value)
     if (elementType.value !== 'freeDraw') {
       currentElement.value.points.push([x.value, y.value])
       currentElement.value.points.push([0, 0])

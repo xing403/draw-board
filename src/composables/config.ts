@@ -1,5 +1,6 @@
 import rough from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas'
+import type { Options } from 'roughjs/bin/core'
 import type { ElementGraph, ElementType, OperationType, PositionType, SettingType } from 'shims'
 
 export const canvas = ref<HTMLCanvasElement>()

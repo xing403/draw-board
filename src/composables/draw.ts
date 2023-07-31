@@ -1,4 +1,4 @@
-import type { Drawable } from 'roughjs/bin/core'
+import type { Drawable, Options } from 'roughjs/bin/core'
 import type { Point } from 'roughjs/bin/geometry'
 import type { ElementGraph, ElementType, PositionType } from 'shims'
 import { FormatGraphPoint, rotate } from '../utils'
@@ -100,7 +100,7 @@ export function handleDrawCanvas() {
  * @param y 元素y轴坐标
  * @returns
  */
-export function initializeGraph(type: ElementType, x: number, y: number) {
+export function initializeGraph(type: ElementType, x: number, y: number, config: Options) {
   const element: ElementGraph = {
     id: getUUID(),
     type,
@@ -112,6 +112,7 @@ export function initializeGraph(type: ElementType, x: number, y: number) {
     draw: () => { },
     points: [],
     area: { p1: [x, y], p2: [x, y] },
+    config,
   }
   return element
 }
@@ -130,7 +131,7 @@ export function processingShape(element: ElementGraph) {
     }
   }
   else if (element.type === 'rectangle') {
-    shape = generator.rectangle(0, 0, element.width, element.height)
+    shape = generator.rectangle(0, 0, element.width, element.height, element.config)
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
       rc.draw(shape)
@@ -138,7 +139,7 @@ export function processingShape(element: ElementGraph) {
     }
   }
   else if (element.type === 'ellipse') {
-    shape = generator.ellipse(element.width / 2, element.height / 2, element.width, element.height)
+    shape = generator.ellipse(element.width / 2, element.height / 2, element.width, element.height, element.config)
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
       rc.draw(shape)
@@ -146,7 +147,7 @@ export function processingShape(element: ElementGraph) {
     }
   }
   else if (element.type === 'line') {
-    shape = generator.line(0, 0, element.width, element.height)
+    shape = generator.line(0, 0, element.width, element.height, element.config)
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
       rc.draw(shape)
@@ -169,9 +170,9 @@ export function processingShape(element: ElementGraph) {
     const [x4, y4] = rotate(xs, ys, x2, y2, (angle * Math.PI) / 180)
 
     shape = [
-      generator.line(x3, y3, x2, y2),
-      generator.line(x1, y1, x2, y2),
-      generator.line(x4, y4, x2, y2),
+      generator.line(x3, y3, x2, y2, element.config),
+      generator.line(x1, y1, x2, y2, element.config),
+      generator.line(x4, y4, x2, y2, element.config),
     ]
 
     element.draw = (rc, context) => {
@@ -182,7 +183,7 @@ export function processingShape(element: ElementGraph) {
     }
   }
   else if (element.type === 'freeDraw') {
-    shape = generator.linearPath(element.points as Point[])
+    shape = generator.linearPath(element.points as Point[], element.config)
     element.draw = (rc, context) => {
       context.translate(element.x, element.y)
       rc.draw(shape)
