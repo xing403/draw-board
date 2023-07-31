@@ -18,8 +18,9 @@ function handleMouseDown() {
       elementType.value = 'drag'
     }
     else if (selectLen === 1) {
-      const pos = checkPointInBoxPos(selects[0], [x.value, y.value], 2 * setting.value.styleType.selectMargin)
-      if (pos !== 'in' && pos !== 'out' && selects[0].type !== 'freeDraw') {
+      Pos.value = checkPointInBoxPos(selects[0], [x.value, y.value], 2 * setting.value.styleType.selectMargin)
+      changePointStyle({ pos: Pos.value })
+      if (Pos.value !== 'in' && Pos.value !== 'out' && selects[0].type !== 'freeDraw') {
         elementType.value = 'change'
         currentElement.value = selects[0]
       }
