@@ -1,4 +1,5 @@
 import { type } from 'os'
+import { Options } from 'roughjs/bin/core'
 import { Point } from 'roughjs/bin/geometry'
 
 declare module '*.vue' {
@@ -21,6 +22,7 @@ interface ElementGraph {
     p2: Point
   }
   draw: (rc: any, context: any) => void,
+  config:Options
 }
 type OperationType = ElementGraph[]
 interface SettingType {

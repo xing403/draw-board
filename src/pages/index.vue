@@ -27,7 +27,7 @@ function handleMouseDown() {
   }
   if (!['drag', 'move', 'change', 'eraser'].includes(elementType.value)) {
     clearAllSelect()
-    currentElement.value = initializeGraph(elementType.value, x.value, y.value)
+    currentElement.value = initializeGraph(elementType.value, x.value, y.value, style.value)
     if (elementType.value !== 'freeDraw') {
       currentElement.value.points.push([x.value, y.value])
       currentElement.value.points.push([0, 0])
@@ -124,7 +124,7 @@ async function handleMouseUp() {
     const correction = cloneCopy(currentElement.value) as ElementGraph
     const [x1, y1, x2, y2] = FormatGraphPoint(correction)
 
-    currentElement.value = initializeGraph(currentElement.value.type, x1, y1) as ElementGraph
+    currentElement.value = initializeGraph(currentElement.value.type, x1, y1, style.value) as ElementGraph
     if (['line', 'arrow'].includes(currentElement.value.type)) {
       if (correction.height < 0)
         currentElement.value.y = y2
@@ -170,6 +170,65 @@ onMounted(() => {
   rc.value = new RoughCanvas(canvas.value)
   initDrawBoard()
   undoList.value.push(cloneCopy(elements.value))
+  // rc.value.rectangle(400, 400, 400, 400, {
+  //   // maxRandomnessOffset: 7, // 素描线最大随机偏移量
+  //   // roughness: 0, // 素描线离散程度
+  //   // bowing: 0, // 素描线弯曲度数
+  //   // stroke: 'red', // 边框颜色
+  //   // strokeWidth: 1, //边框 宽度
+  //   curveFitting: 0,
+  //   // curveTightness: 1,
+  //   // curveStepCount: 1,
+  //   // fill: '',
+  //   // fillStyle: '',
+  //   // fillWeight: 1,
+  //   // hachureAngle: 0,
+  //   // hachureGap: 0,
+  //   // simplification: 0,
+  //   // dashOffset: 0,
+  //   // dashGap: 0,
+  //   // zigzagOffset: 0,
+  //   // seed: 0,
+  //   // strokeLineDash: [],
+  //   // strokeLineDashOffset: 0,
+  //   // fillLineDash: [],
+  //   // fillLineDashOffset: 0,
+  //   // disableMultiStroke: false,
+  //   // disableMultiStrokeFill: false,
+  //   // preserveVertices: false,
+  //   // fixedDecimalPlaceDigits: 0,
+  // })
+  // const shape = generator.ellipse(400, 400, 100, 100)
+  // console.log(shape)
+  // rc.value.draw(shape)
+  // rc.value.ellipse(400, 400, 100, 100, {
+  // maxRandomnessOffset: 7, // 素描线最大随机偏移量
+  // roughness: 0, // 素描线离散程度
+  // bowing: 0, // 素描线弯曲度数
+  // stroke: 'red', // 边框颜色
+  // strokeWidth: 1, //边框 宽度
+  // curveFitting: 1,
+  // curveTightness: 0, // 曲线离散程度
+  // curveStepCount: 360, // 绘制完整曲线进行多少步
+  // fill: 'red', // 填充颜色
+  // fillStyle: 'sunburst', // 填充样式  hachure(default) 素描线, solid 完全, zigzag z字形 , cross-hatch 十字素描线, dots 点, sunburst, dashed 虚线填充,zigzag-line 波浪线填充
+  // fillWeight: 3,
+  // hachureAngle: 0,
+  // hachureGap: 0,
+  // simplification: 0,
+  // dashOffset: 0,
+  // dashGap: 0,
+  // zigzagOffset: 0,
+  // seed: 0,
+  // strokeLineDash: [],
+  // strokeLineDashOffset: 0,
+  // fillLineDash: [],
+  // fillLineDashOffset: 0,
+  // disableMultiStroke: false,
+  // disableMultiStrokeFill: false,
+  // preserveVertices: false,
+  // fixedDecimalPlaceDigits: 0,
+  // })
 })
 function handleTouchDown(e: TouchEvent) {
   if (e.touches.length === 1) {
@@ -187,14 +246,12 @@ function handleTouchUp() {
 </script>
 
 <template>
-  <div overflow="hidden">
+  <div overflow="hidden" relative>
     <tool-bar />
-    <div fixed bottom-30px right-20px>
-      <div flex="~ col gap-1" w-full>
-        <help />
-        <Setting />
-        <button i-carbon-sun dark:i-carbon-moon btn icon-btn @click="toggleDark()" />
-      </div>
+    <div fixed bottom-30px right-20px flex="~ col gap-1" z-0>
+      <help />
+      <Setting />
+      <button i-carbon-sun dark:i-carbon-moon btn icon-btn @click="toggleDark()" />
     </div>
     <canvas
       ref="canvasRef" :width="width" :height="height" bg-white dark:bg-gray-8 @mousedown="handleMouseDown"
@@ -207,6 +264,3 @@ function handleTouchUp() {
     />
   </div>
 </template>
-
-<style>
-</style>

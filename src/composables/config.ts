@@ -1,5 +1,6 @@
 import rough from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas'
+import type { Options } from 'roughjs/bin/core'
 import type { ElementGraph, ElementType, OperationType, PositionType, SettingType } from 'shims'
 
 export const canvas = ref<HTMLCanvasElement>()
@@ -49,3 +50,25 @@ export const setting = useLocalStorage<SettingType>('setting', {
     cursorStyle: 'crosshair',
   },
 }, { mergeDefaults: true })
+
+export const style = useLocalStorage<Options>('style', {
+  bowing: 1,
+  curveFitting: 0.95,
+  curveStepCount: 9,
+  curveTightness: 0,
+  dashGap: -1,
+  dashOffset: -1,
+  disableMultiStroke: false,
+  disableMultiStrokeFill: false,
+  fillStyle: 'hachure',
+  fillWeight: -1,
+  hachureAngle: -41,
+  hachureGap: -1,
+  maxRandomnessOffset: 2,
+  preserveVertices: false,
+  roughness: 1,
+  seed: 0,
+  stroke: '#000',
+  strokeWidth: 1,
+  zigzagOffset: -1,
+})
