@@ -124,7 +124,7 @@ async function handleMouseUp() {
     const correction = cloneCopy(currentElement.value) as ElementGraph
     const [x1, y1, x2, y2] = FormatGraphPoint(correction)
 
-    currentElement.value = initializeGraph(currentElement.value.type, x1, y1) as ElementGraph
+    currentElement.value = initializeGraph(correction.type, x1, y1, correction.config) as ElementGraph
     if (['line', 'arrow'].includes(currentElement.value.type)) {
       if (correction.height < 0)
         currentElement.value.y = y2
